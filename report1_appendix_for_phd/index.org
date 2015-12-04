@@ -9,7 +9,7 @@
 #+begin_src R :session *R* :tangle no :exports none :eval yes :padline yes
   
   # func
-  setwd("~/projects/swish-dmp/")
+  setwd("~/projects/swish-dmp/report1_appendix_for_phd")
   library(rmarkdown)
   library(knitr)
   library(knitcitations)
@@ -30,70 +30,71 @@
 
 * head
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
----
-title: "Data management for implementing an eco-social epidemiologic research programme"
-author: Ivan C. Hanigan
-header-includes:
-  - \usepackage{graphicx}
-  - \usepackage{setspace}
-output:
-  html_document:
-    toc: true
-    theme: united
-    number_sections: yes    
-    toc_depth: 2
-  pdf_document:
-    toc: true
-    toc_depth: 2
-    highlight: zenburn
-    keep_tex: true
-    number_sections: yes        
-documentclass: article
-classoption: a4paper
-csl: meemodified.csl
-bibliography: references.bib
----
-
-\doublespacing
-
-```{r echo = F, eval=F, results="hide"}
-
-# func
-setwd("~/projects/swish-dmp/")
-library(rmarkdown)
-library(knitr)
-library(knitcitations)
-library(bibtex)
-cleanbib()
-#rm("bib")
-#options("cite_format"="pandoc")
-cite_options(citation_format = "pandoc", check.entries=FALSE)
-
-#rmarkdown::render("Hanigan-Thesis-Bridging.Rmd", "html_document")
-#rmarkdown::render("Hanigan-Thesis-Papers.Rmd", "html_document")
-
-rmarkdown::render("Hanigan-Thesis-Bridging.Rmd", "pdf_document")
-#rmarkdown::render("Hanigan-Thesis-Papers.Rmd", "pdf_document")
-#rmarkdown::render("suiclim.Rmd", "pdf_document")
-# rmarkdown::render("chap-synthesis.Rmd", "pdf_document")
-#rmarkdown::render("chap-synthesis.Rmd", "html_document")
-#browseURL("Hanigan-Thesis-Bridging.pdf")
-# browseURL("suiclim.pdf")
-
-# to make on editable
-# browseURL("Hanigan-Thesis-Bridging.html")
-# Then use word to copy/paste into the doc
-
-# also tried
-#knit2html("Hanigan-Thesis-Bridging.Rmd", options = c("toc", markdown::markdownHTMLOptions(TRUE)), sylesheet='custom.css')
-#system("pandoc -i Hanigan-Thesis-Bridging.md -o Hanigan-Thesis-Bridging.html --bibliography references.bib")
-#rmarkdown::render("Hanigan-Thesis-Bridging.Rmd", "word_document")
-# browseURL("Hanigan-Thesis-Bridging.html")
-#system("pandoc -V papersize:'a4paper' -i Hanigan-Thesis-Bridging.html -o Hanigan-Thesis-Bridging.docx ")
-
-# but all have issues with the tables
-
-```
+  ---
+  title: "Best practices for reproducible research pipelines in eco-social epidemiology"
+  author:  
+  - name: Ivan C. Hanigan
+    affilnum: 1
+    email: ivan.hanigan@anu.edu.au  
+  affiliation:
+  - affilnum: 1
+    affil: National Centre for Epidemiology and Population Health (ANU) 
+  header-includes:
+    - \usepackage{graphicx}
+    - \usepackage{url}   
+  output:
+    pdf_document:
+      fig_caption: yes
+      keep_tex: yes
+      number_sections: yes
+      template: components/manuscript.latex
+    html_document: null
+    word_document: null
+  fontsize: 11pt
+  capsize: normalsize
+  csl: meemodified.csl
+  documentclass: article
+  classoption: a4paper
+  spacing: singlespacing
+  linenumbers: no
+  bibliography: references.bib
+  abstract: no
+  ---
+  
+  
+  
+  ```{r echo = F, eval=F, results="hide"}
+  # func
+  setwd("~/projects/swish-dmp/report1_appendix_for_phd")
+  library(rmarkdown)
+  library(knitr)
+  library(knitcitations)
+  library(bibtex)
+  cleanbib()
+  # rm("bib")
+  #options("cite_format"="pandoc")
+  cite_options(citation_format = "pandoc", check.entries=FALSE)
+  
+  #rmarkdown::render("swish-dmp-report.Rmd", "html_document")  
+  rmarkdown::render("swish-dmp-report.Rmd", "pdf_document")
+  # browseURL("swish-dmp-report.pdf")
+  # browseURL("swish-dmp-report.html")
+  
+  ```
+  ```{r echo = F, results="hide"}
+  # load
+  if(!exists("bib")){
+  bib <- read.bibtex("~/references/library.bib")
+   
+  for(bibkey in c("SarathiBiswas2012",
+    "Mcmichael2002a", "Gelman2013"
+  )){
+  bib[[bibkey]]$url <- gsub("\\{\\\\_\\}","_", bib[[bibkey]]$url)
+  bib[[bibkey]]$url <- gsub("\\{~\\}","~", bib[[bibkey]]$url)
+  }
+   
+  }
+  ```
 #+end_src
 
 * Implementing Reproducible research pipelines in epidemiology
@@ -110,11 +111,16 @@ rmarkdown::render("Hanigan-Thesis-Bridging.Rmd", "pdf_document")
 *** Rmd
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
-  # Implementing reproducible research pipelines in epidemiology
+  # Introduction
+  
+  There is a need for developing an evidence based set of best practice
+  guidelines for data management in implementing an eco-social
+  epidemiologic research programme (TODO Cite Peng Evidence Based Data
+  Analysis).  This can be conceptualised as implementing reproducible
+  research pipelines in epidemiology.
   
   
   ## Configuration versus convention: the case for standardised approaches  
-
   
   In the first chapter the concepts of reproducibility and replication
   were explained.  These concepts are central to the emerging field of
