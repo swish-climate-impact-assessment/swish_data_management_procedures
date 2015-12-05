@@ -26,12 +26,12 @@
 #+end_src  
 
 #+RESULTS:
-: /home/ivan_hanigan/projects/hanigan-thesis/thesis/swish-dmp-report.pdf
+: /home/ivan_hanigan/projects/swish-dmp/report1_appendix_for_phd/swish-dmp-report.pdf
 
 * head
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ---
-  title: "Best practices for reproducible research pipelines in eco-social epidemiology"
+  title: "Appendix 1: Best practices for reproducible research pipelines in eco-social epidemiology"
   author:  
   - name: Ivan C. Hanigan
     affilnum: 1
@@ -251,7 +251,7 @@
   be preferred over selectively choosing what information one collects
   and what fieldnames one uses to describe each item of documentation.
   Ecological Metadata Language (EML) and the Data Documentation
-  Inititative (DDI) are two such standards that offer useful ontological
+  Inititative (DDI) are two such standards that offer useful semantic
   constructs for describing epidemiological data.
   
   ### Distribution
@@ -318,34 +318,22 @@
   'succession plan' that sets out the vision of the data collections
   preservation and re-use into the future.
   
-  ### Metadata standards
+  ### Case study 1: Ecological Metadata  Language (EML)
   
   For data to be reused in the future, metadata and documentation need to be carefully
   prepared to allow future users (including the original collector) to find and understand the
   data (Michener et al. 1997). Metadata should be associated with the data
-  and adhere to a standard schema. A number of metadata schemas are available to choose
-  from. For example, the Dublin Core is a general international standard for metadata, while
-  domain-specific schemas include the Ecological Metadata Language (EML) for ecology, and the
-  Data Documentation Initiative (DDI) for social science. Good metadata requires sufficient detail
+  and adhere to a standard schema. This example shows the use of the Ecological Metadata Language (EML). 
+
+  Good metadata requires sufficient detail
   to describe the collection process and to record decisions that were made during the
   design phase about the use of different sampling methods. Time and effort may be saved
   by considering metadata requirements at the commencement of a study, rather than trying
   to recall all the details later. If metadata adheres to a standard schema, it can be used in
   catalogues to enable fast searching and retrieval, or in machine-to-machine data queries
   that assist data access and use.
-  
-  In this thesis two metadata standards were explored: the DDI and the
-  EML. The EML standard was chosen for processing most of the data
-  publications of this thesis as it is also used internationally by
-  large organisations who are actively developing new approaches to data
-  distribution.  These include the Data Observation Network for Earth
-  (DataONE) nodes, the United States Long Term Ecological Research (US
-  LTER) network and the International Long Term Ecological Research
-  (ILTER) network. Additionally, the standard is used in Australia at
-  organisations such as the Long Term Ecological Research Network where
-  Dataset 2 of this thesis was published.
-  
-  In EML the elements of any dataset can be seen as nested at three levels:
+    
+  In EML the elements of any dataset can be seen as a nested hierarchy at three levels:
    
   1. The Project level: this is an overarching grouping of data.  It might be indicative of the principal investigator or organisation who provided the data, or a programme of research studies.
   2. The Dataset level: this is a distinct grouping of data that might be organised around a particular time period or geographical region.
@@ -363,7 +351,7 @@
   
   
   
-  ### Case study 1: visualisation of methods steps using bespoke software
+  ### Case study 2: Visualisation of methods steps using bespoke software
   
   The method step is the key atomic unit of a scientific pipeline.  It consists of inputs, outputs and a rationale for why the step is taken.
   
@@ -401,7 +389,7 @@
   
   The steps and data listed in Table \ref{tab:TableBasic} can be
   visualised.  To achieve this an R function was written as part of this
-  PhD project and is demonstrated in case study 1: below.  The code is distributed in the author\'s own R package
+  PhD project and is distributed in the author\'s own R package
   available on Github
   (\url{https://github.com/ivanhanigan/disentangle}).  This is the
   `newnode` function.  The function returns a string of text written in
@@ -445,7 +433,7 @@
   increased recently in Australia.  As an example the custodians of the
   national mortality database made it virtually impossible to access
   these data for several years after the discovery of an incident in
-  which Australian population health researcher Dr Stephen Begg had
+  which Australian population health researcher Dr Stephen Begg was reported to have
   hacked into the database in an illegal act
   `r citep(bib[["OKeefe2007"]])`.  The subsequent investigation by the
   data custodians led to a wide ranging modification to the procedures
@@ -622,11 +610,11 @@ the consequences of catastrophes such as fire or flooding
   first proposed by Josh Reich on the open-source software discussion
   forum called 'stack overflow' (http://stackoverflow.com/a/1434424),
   and then encoded into the 'makeProject' R package
-  (http://cran.r-project.org/web/packages/makeProject/makeProject.pdf).  The approach is demonstrated in case study 2 below.
+  (http://cran.r-project.org/web/packages/makeProject/makeProject.pdf).  The approach is demonstrated in case study 3 below.
   
   \clearpage
 
-  ### Case study 2: Simple pipeline using the makeProject package 
+  ### Case study 3: Simple pipeline using the makeProject package 
   ```{r, eval = F}
   # in an interactive R session at the command line choose your project directory
   setwd("~/projects")   
@@ -823,7 +811,7 @@ the consequences of catastrophes such as fire or flooding
   A very simple example of a pipeline is shown in Table
   \ref{tab:TablePipe1}.  The steps and data listed in Table
   \ref{tab:TablePipe1} can be visualised using the `newnode` function
-  described above in case study 1.  This creates the graph of this pipeline
+  described above in case study 2.  This creates the graph of this pipeline
   shown in Figure \ref{fig:FigSteps}.  As the analysis progresses
   through the phases of testing, refinement and final versions. The
   linked table and graphical depiction can be very helpful for reference
@@ -907,8 +895,11 @@ the consequences of catastrophes such as fire or flooding
   
 
 #+end_src
-** refs
+** conc and refs
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  # Discussion and Conclusion
+
+  - TODO 
 
   # References
   
