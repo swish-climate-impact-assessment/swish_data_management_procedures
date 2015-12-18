@@ -21,17 +21,17 @@
   
   #rmarkdown::render("swish-dmp-report.Rmd", "html_document")  
   rmarkdown::render("swish-dmp-report.Rmd", "pdf_document")
-  # browseURL("swish-dmp-report.pdf")
+   browseURL("swish-dmp-report.pdf")
   # browseURL("swish-dmp-report.html")
 #+end_src  
 
 #+RESULTS:
-: /home/ivan_hanigan/projects/swish-dmp/report1_appendix_for_phd/swish-dmp-report.pdf
+: 0
 
 * head
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ---
-  title: "Appendix 1: Best practices for reproducible research pipelines in eco-social epidemiology"
+  title: "Appendix 1: Evidence-based data analysis pipelines for eco-social epidemiology"
   author:  
   - name: Ivan C. Hanigan
     affilnum: 1
