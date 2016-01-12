@@ -1,4 +1,4 @@
-#+TITLE:SWISH DMP 
+#+TITLE: Appendix 1: Evidence-based data analysis pipelines for eco-social epidemiology
 #+AUTHOR: Ivan Hanigan
 #+email: ivan.hanigan@anu.edu.au
 #+LaTeX_CLASS: article
@@ -99,9 +99,8 @@
   ```
 #+end_src
 
-* Implementing Reproducible research pipelines in epidemiology
-** 2.1 intro to R epi 
-*** snip-code
+* 2.1 intro to R epi 
+** snip-code
 ## Introduction to reproducible epidemiological data science
   The details of the scientific questions that motivated the work on
   reproducibility are not included, however throughout the discussion
@@ -110,7 +109,7 @@
   the selection of the material included.  Other scientific disciplines
   may find different components of pipelines are required for specific
   data collection and management techniques. 
-*** Rmd
+** Rmd
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   # Introduction
@@ -150,7 +149,7 @@
   'you could at least have a sense that something reasonable was done'
   and be confident that you could easily check what had been done if you needed to.
 #+end_src
-*** COMMENT snip-code
+** COMMENT snip-code
 #+name:snip
 #+begin_src R :session *R* :tangle no :exports none :eval no
   #### name:snip ####
@@ -178,7 +177,7 @@
 
 
 #+end_src
-*** Core components of pipeline
+** Core components of pipeline
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ### The core components of a pipeline
   As mentioned in chapter 1, `r citet(bib[["Peng2006"]])` distilled a core set of components for reproducibility from earlier work including that of `r citet(bib[["Schwab2000"]])`.  These are:
@@ -269,8 +268,8 @@
   users to piece these together.
   
 #+end_src
-** 2.2 fundamentals
-*** Rmd procedures of a RRP 
+* 2.2 fundamentals
+** Rmd procedures of a RRP 
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -287,18 +286,18 @@
   - Distributing the materials.
 
 #+end_src
-*** Rmd Data management plan and data inventory
+** Rmd Data management plan and data inventory
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
     
   ### Data management plan and data inventory
   
-  TBA, there is dev version on my blog [http://127.0.0.1:4000/2016/01/dmp-and-data-inventory/]()
+  TBA, there is better dev version at /home/ivan_hanigan/projects/swish-dmp/report_swish_data_management_procedures/index.org::DMP and datinv
 
   
   
 #+end_src
 
-*** Rmd Case study 2: Visualisation of methods steps using bespoke software
+** Rmd Case study 2: Visualisation of methods steps using bespoke software
 #+name:box1
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
@@ -370,8 +369,8 @@
   \end{figure}
   \clearpage
 #+end_src
-** data storage and access
-*** Rmd
+* data storage and access
+** Rmd
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   ### Data storage and access 
@@ -415,7 +414,7 @@
    
   
 #+end_src
-*** DONE rational for naming and shaming Dr Begg
+** DONE rational for naming and shaming Dr Begg
 Hi Steve,
 
 Good point, I actually want to attribute this data misuse to the researchers not the school.
@@ -452,9 +451,8 @@ On Thu, Dec 3, 2015 at 10:00 AM, Steven McEachern <steven.mceachern@anu.edu.au> 
     Cheers,
     Steve
 
-
-** snip-code
-*** snip
+* snip-code
+** snip
 Who decides?  In many cases people preserve data 'in case' and, if
   so, some of it turn out to be considered junk that later causes a
   problem. 
@@ -486,8 +484,8 @@ the consequences of catastrophes such as fire or flooding
   is understandable to the end user and as free from inconsistencies as
   possible.
 
-*** pres
-**** COMMENT pres1
+** pres
+*** COMMENT pres1
 #+name:pres
 #+begin_src R :session *R* :tangle no :exports none :eval no
   #### name:pres ####
@@ -500,7 +498,7 @@ the consequences of catastrophes such as fire or flooding
     '), stringsAsFactors = F, strip.white = T)
   write.csv(steps, "steps_basic_workflow.csv", row.names = F)
 #+end_src
-*** COMMENT steps_basic_workflow
+** COMMENT steps_basic_workflow
 #+name:steps_basic_workflow
 #+begin_src R :session *R* :tangle steps_basic_workflow.R :exports none :eval no
   library(disentangle); library(stringr); library(readxl)
@@ -512,7 +510,7 @@ the consequences of catastrophes such as fire or flooding
   
 #+end_src
 
-** 2.3 DEPRECATED, ALREADY DISCUSSED distro
+* 2.3 DEPRECATED, ALREADY DISCUSSED distro
 #+begin_src R :session *R* :tangle no :exports none :eval no
   ## Distributing data, code and documentation
   
@@ -520,7 +518,7 @@ the consequences of catastrophes such as fire or flooding
   - Sharing computer code via Github
   - Publishing well documented data with metadata in a standard format (EML, DDI, ANZLIC)
 #+end_src
-** 2.4 NOT NEEDED planning
+* 2.4 NOT NEEDED planning
 #+begin_src R :session *R* :tangle no :exports none :eval no
 
 
@@ -541,8 +539,8 @@ the consequences of catastrophes such as fire or flooding
   1. Reporting
   1. Distribution of code and data.
 #+end_src
-** 2.5 implement
-*** Rmd
+* 2.5 implement
+** Rmd
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -596,7 +594,7 @@ the consequences of catastrophes such as fire or flooding
   rmarkdown::render("My-Pipeline-Report.Rmd", "pdf_document")
   ```
 #+end_src
-*** COMMENT snip
+** COMMENT snip
 #+name:snip
 #+begin_src R :session *R* :tangle no :exports none :eval no
   ### More complicated pipeline framework for data analysis
@@ -651,7 +649,7 @@ the consequences of catastrophes such as fire or flooding
   ```
 #+end_src
 
-*** COMMENT files files files
+** COMMENT files files files
 
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no    
   ### File organization and naming
@@ -702,7 +700,7 @@ the consequences of catastrophes such as fire or flooding
   
   
 #+end_src
-*** COMMENT snip
+** COMMENT snip
 #+name:snip
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
@@ -740,7 +738,7 @@ the consequences of catastrophes such as fire or flooding
   
   \clearpage
 #+end_src
-*** snip-code
+** snip-code
 
 ### Key issues
 
@@ -751,9 +749,9 @@ the consequences of catastrophes such as fire or flooding
 - Concern is how to deal with in house data before you start your analysis, this is critical for reproducible research - so that you could go back and reproduce your analysis
 - Recommended by some is 'convention over configuration' advice, and links to evidence based recommended filing systems. 
 
-** 2.6 viz
-*** TODO make better fit on A4 sheet, explain each of the main pathways in this pipeline, link to web version, put table in appendix
-*** vis
+* 2.6 viz
+** TODO make better fit on A4 sheet, explain each of the main pathways in this pipeline, link to web version, put table in appendix
+** vis
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -849,7 +847,7 @@ the consequences of catastrophes such as fire or flooding
   
 
 #+end_src
-** conc and refs
+* conc and refs
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   # Discussion and Conclusion
 
