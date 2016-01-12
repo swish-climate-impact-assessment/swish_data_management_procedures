@@ -21,24 +21,25 @@
   
   #rmarkdown::render("swish-dmp-report.Rmd", "html_document")  
   rmarkdown::render("swish-dmp-report.Rmd", "pdf_document")
-   browseURL("swish-dmp-report.pdf")
+  # browseURL("swish-dmp-report.pdf")
   # browseURL("swish-dmp-report.html")
 #+end_src  
 
 #+RESULTS:
-: 0
+: /home/ivan_hanigan/projects/swish-dmp/report1_appendix_for_phd/swish-dmp-report.pdf
 
 * head
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ---
   title: "Appendix 1: Evidence-based data analysis pipelines for eco-social epidemiology"
+  date: \today
   author:  
   - name: Ivan C. Hanigan
     affilnum: 1
     email: ivan.hanigan@anu.edu.au  
   affiliation:
   - affilnum: 1
-    affil: National Centre for Epidemiology and Population Health (ANU) 
+    affil: Centre for Research and Action in Public Health, University of Canberra, ACT 2617, Australia
   header-includes:
     - \usepackage{graphicx}
     - \usepackage{url}   
@@ -48,6 +49,7 @@
       keep_tex: yes
       number_sections: yes
       template: components/manuscript.latex
+      toc: yes
     html_document: null
     word_document: null
   fontsize: 11pt
@@ -115,22 +117,26 @@
   
   There is a need for developing an evidence based set of best practice
   guidelines for data management in implementing an eco-social
-  epidemiologic research programme (TODO Cite Peng Evidence Based Data
-  Analysis).  This can be conceptualised as implementing reproducible
+  epidemiologic research programme `r citet(bib[["Peng"]])`.  This can be conceptualised as implementing reproducible
   research pipelines in epidemiology.
   
   
   ## Configuration versus convention: the case for standardised approaches  
   
-  In the first chapter the concepts of reproducibility and replication
-  were explained.  These concepts are central to the emerging field of
-  data science.  Here, the focus is on reproducibility in particular.
-  Overall, there is a guiding principle that for the effective
-  implementation of pipelines, scientists should employ standardised and
-  evidence-based methods based on conventions developed from many data
-  analysts approaching the problems in a similar way, rather than each
-  analyst configuring a pipeline to suit a particular individual or
-  domain-specific preferences.
+  Reproducibility is the ability to recompute the results of a data
+  analysis with the original data.  It is possible to have analyses that
+  are reproducible with varying degrees of difficulty. A data
+  analysis might be reproducible but require thousands of hours of work.
+  A primary challenge to reproducible data analysis is to make analyses
+  that are \emph{easy} to reproduce.
+  
+  To achieve this, a guiding principle is that analysts should
+  effectivly implement 'pipelines' of method steps and tools.  Data
+  analysts should employ standardised and evidence-based methods based
+  on conventions developed from many data analysts approaching the
+  problems in a similar way, rather than each analyst configuring a
+  pipeline to suit a particular individual or domain-specific
+  preferences.
   
   `r citet(bib[["Noble2009"]])` points out that
   'the principles behind organizing and documenting computational experiments are often learned on the fly, and this learning is strongly influenced by personal predilections'.
@@ -264,7 +270,7 @@
   
 #+end_src
 ** 2.2 fundamentals
-*** Rmd
+*** Rmd procedures of a RRP 
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -279,72 +285,20 @@
   - Maintaining data storage
   - Writing reports
   - Distributing the materials.
-  
+
+#+end_src
+*** Rmd Data management plan and data inventory
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+    
   ### Data management plan and data inventory
   
-  In environmental epidemiology there is a need for a data management
-  plan and a data inventory that enables the scientist (or
-  multidisciplinary teams of scientists) to manage a large and
-  heterogeneous collection of disparate data sources efficiently.
-  Keeping track of all the elements of a linked health, social and
-  environmental database is very challenging, despite major improvements
-  in data management software, web-portals and virtual laboratories
-  `r citep(bib[["Fleming2014"]])`.
-  
-  Effective data management policies and procedures are essential in
-  managing data-related risk. Such risks include data loss or
-  corruption, technological obsolescence, breaches of privacy or
-  copyright, and errors or misuse.  Misuse may be due either to
-  unintended user misunderstandings about data attributes (no dataset is
-  perfect and self-explanatory, see `r citet(bib[["Michener1997"]])`) or
-  intentional mis-use for malicious or selfish reasons (for example the
-  misuse of data by Bjorn Lomborg to support the argument that
-  environmental health conditions are actually improving.  See
-  `r citet(bib[["Bodnar2004"]])` for a discussion on Lomborg\'s misuse
-  of data.  There have also been examples of mistakes in climate change
-  science `r citep(bib[["Cai2010"]])`.  The careful storage and curation
-  of datasets is critical—data from many studies are lost
-  `r citep(c(bib[["Pullin2010"]], bib[["Vines2014a"]]))`.
-  
-  Data management plans are needed for developing procedures and
-  processes to keep data safe.  There is an issue when ensuring that all
-  relevant data are collected in deciding what is relevant.  Keeping an
-  up-to-date data inventory and careful organisation of all folders and
-  files helps mitigate these problems.
-  
-  Whether data management is the responsibility of the individuals
-  collecting or collating it, or of the lead scientist, clarity on how
-  and where data are stored and who manages it is vital, as is a
-  'succession plan' that sets out the vision of the data collections
-  preservation and re-use into the future.
-  
-  ### Case study 1: Ecological Metadata  Language (EML)
-  
-  For data to be reused in the future, metadata and documentation need to be carefully
-  prepared to allow future users (including the original collector) to find and understand the
-  data (Michener et al. 1997). Metadata should be associated with the data
-  and adhere to a standard schema. This example shows the use of the Ecological Metadata Language (EML). 
+  TBA, there is dev version on my blog [http://127.0.0.1:4000/2016/01/dmp-and-data-inventory/]()
 
-  Good metadata requires sufficient detail
-  to describe the collection process and to record decisions that were made during the
-  design phase about the use of different sampling methods. Time and effort may be saved
-  by considering metadata requirements at the commencement of a study, rather than trying
-  to recall all the details later. If metadata adheres to a standard schema, it can be used in
-  catalogues to enable fast searching and retrieval, or in machine-to-machine data queries
-  that assist data access and use.
-    
-  In EML the elements of any dataset can be seen as a nested hierarchy at three levels:
-   
-  1. The Project level: this is an overarching grouping of data.  It might be indicative of the principal investigator or organisation who provided the data, or a programme of research studies.
-  2. The Dataset level: this is a distinct grouping of data that might be organised around a particular time period or geographical region.
-  3. The Entity level: This grouping of data includes data files (such as tables in CSV or Excel, shapefiles and raster images) or documents (such as metadata descriptions or related publications). 
-  
-  This conceptual framework can be very useful for the organisation of the work constituting a single pipeline, as well as when working with multiple pipelines within several projects.
   
   
 #+end_src
 
-*** box1
+*** Rmd Case study 2: Visualisation of methods steps using bespoke software
 #+name:box1
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
