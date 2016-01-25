@@ -29,6 +29,7 @@
 : /home/ivan_hanigan/projects/swish-dmp/swish_data_management_procedures/swish-dmp-report.pdf
 
 * head
+
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ---
   title: "Data management procedures for reproducible research pipelines"
@@ -55,10 +56,9 @@
   spacing: singlespacing
   linenumbers: no
   bibliography: references.bib
-  abstract: no
+  abstract:   This unpublished working paper was written to  accompany the material included in the PhD thesis 'Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors' by Ivan Hanigan (2016).  It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of heterogeneous datasets for analysis and reporting.  The draft was last updated \today. The version submitted with the thesis is available as part of a Github repository at [https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/swish-dmp-report.pdf](https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/swish-dmp-report.pdf).
+  
   ---
-  
-  
   
   ```{r echo = F, eval=F, results="hide"}
   # func
@@ -92,22 +92,14 @@
    
   }
   ```
-  \vspace{2mm}\hrule
-  Unpublished working paper\\
-  Draft: \today
-  
-
-  \paragraph*{Abstract:} This unpublished working paper was written to
-  accompany the material included in the PhD thesis:
-  'Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors' by Ivan Hanigan (2016).  It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of heterogeneous datasets for analysis and reporting.
-  
-  The version submitted with the thesis is available as part of a Github repository at: 
-  
-  \vspace{3mm}\hrule
+  \clearpage
   \doublespace
   
 #+end_src
-
+\vspace{2mm}\hrule
+  
+  \vspace{3mm}\hrule
+  
 * 2.1 intro to R epi 
 ** snip-code
 ## Introduction to reproducible epidemiological data science
@@ -124,12 +116,18 @@
   # Introduction
   
   There is a need for developing an evidence based set of best practice
-  guidelines for data management in implementing an eco-social
-  epidemiologic research programme `r citet(bib[["Peng"]])`.  This can be conceptualised as implementing reproducible
-  research pipelines in epidemiology.
+  guidelines for data management procedures in implementing reproducible
+  research pipelines in epidemiology `r citet(bib[["Peng"]])`.  The
+  examples drawn together in this report come from experiences and
+  use-cases found in an eco-social epidemiologic research context.  The
+  emerging paradigm of eco-social epidemiology is inherently concerned
+  with complex systems and integrating heterogenous data sources to aid
+  recognition of patterns in the environmental and social determinants
+  of population health `r citet(bib[["McMichael2013"]])`.  This document
+  outlines a suite of data management procedures that have been found to
+  effectively assist the development of reproducible research pipelines.
   
-  
-  ## Configuration versus convention: the case for standardised approaches  
+  # Configuration versus convention: the case for standardised approaches  
   
   Reproducibility is the ability to recompute the results of a data
   analysis with the original data.  It is possible to have analyses that
@@ -188,7 +186,7 @@
 #+end_src
 ** Core components of pipeline
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
-  ### The core components of a pipeline
+  ## The core components of a pipeline
   As mentioned in chapter 1, `r citet(bib[["Peng2006"]])` distilled a core set of components for reproducibility from earlier work including that of `r citet(bib[["Schwab2000"]])`.  These are:
   
   - Hypothesis and design
@@ -221,7 +219,7 @@
   transparency of the assumptions made.
   
   
-  ### Hypothesis and design
+  ## Hypothesis and design
   
   The first stage of the pipeline is hypothesis generation and study
   design.  In this stage documentation should explain the literature
@@ -230,7 +228,7 @@
   observational unit, measurement method, as well as spatial or temporal
   extent.  This information will also be needed for ethical review and approval.
   
-  ### Data
+  ## Data
   
   The data that were measured should be well managed, however the
   requirements for accessing the original raw data are less important
@@ -239,7 +237,7 @@
   Public data repositories or institutional services such as university
   libraries should be used to ensure longevity of the data storage.  
   
-  ### Methods
+  ## Methods
   
   The software code underlying the principal
   results needs to be made available. In
@@ -247,7 +245,7 @@
   described adequately to 'deploy' a new computer set-up
   that can reproduce the computations needed.
   
-  ### Documentation
+  ## Documentation
   
   Adequate documentation of the code and
   data should be available to enable others to repeat the
@@ -268,7 +266,7 @@
   Inititative (DDI) are two such standards that offer useful semantic
   constructs for describing epidemiological data.
   
-  ### Distribution
+  ## Distribution
   
   Distribution or dissemination of the material needs to use a standard
   method if they are to be used by others.  It is not enough just to
@@ -283,7 +281,7 @@
   
   
   
-  ## Procedures when conducting a reproducible research analysis
+  # Procedures when conducting a reproducible research analysis
   
   Having defined above the principle components for a pipeline there are procedural questions about how to go about compiling those. The key steps include:
   
@@ -298,91 +296,85 @@
 ** Rmd Data management plan and data inventory
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
     
-  ### Data management plan and data inventory
+  ## Data management plan and data inventory
   
-  TBA, there is better dev version at /home/ivan_hanigan/projects/swish-dmp/report_swish_data_management_procedures/index.org::DMP and datinv
-
+  In eco-social epidemiology there is a need for a data management
+  plan and a data inventory that enables individual scientists, or
+  multidisciplinary teams of scientists, to manage large and
+  heterogeneous collections of disparate data sources efficiently.
+  Keeping track of all the elements of a linked health, social and
+  environmental database is very challenging, despite major improvements
+  in data management software, web-portals and virtual laboratories
+  `r citep(bib[["Fleming2014" ]])`.
+  
+  Effective data management policies and procedures are essential in
+  managing data-related risk. Such risks include data loss or
+  corruption, technological obsolescence, breaches of privacy or
+  copyright, and errors or misuse.  Misuse may be due either to
+  unintended user misunderstandings about data attributes (no dataset is
+  perfect and self-explanatory, see `r citet(bib[["Michener1997" ]])`)
+  or intentional mis-use for malicious or selfish reasons (for example
+  the misuse of data by Bjorn Lomborg to support the argument that
+  environmental health conditions are actually improving.  See
+  `r citet(bib[["Bodnar2004" ]])` for a discussion on Lomborg\'s misuse
+  of data.  There have also been notable examples of mistakes in data
+  analyses used for climate change science.  See
+  `r citet(bib[["Cai2010" ]])` for a discussion of one such case.  The
+  careful storage and curation of datasets is also critical because data from many
+  studies are lost
+  `r citep(c(bib[["Pullin2010" ]], bib[["Vines2014a" ]]))`.
+  
+  Data management plans are needed for developing procedures and
+  processes to keep data safe.  There is an issue when ensuring that all
+  relevant data are collected in deciding what is relevant.  Keeping an
+  up-to-date data inventory and careful organisation of all folders and
+  files helps mitigate these problems.
+  
+  Whether data management is the responsibility of the individuals
+  collecting or collating it, or of the lead scientist, clarity on how
+  and where data are stored and who manages it is vital, as is a
+  'succession plan' that sets out the vision of the data collections
+  preservation and re-use into the future.
+  
+  
   
   
 #+end_src
-
-** Rmd Case study 2: Visualisation of methods steps using bespoke software
-#+name:box1
+** Rmd Case study 1: EML and folder structure
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+
+    
+  ## Case study 1: Ecological Metadata  Language (EML) and folder structure
   
+  For data to be reused in the future, metadata and documentation need to be carefully
+  prepared to allow future users (including the original collector) to find and understand the
+  data (Michener et al. 1997). Metadata should be associated with the data
+  and adhere to a standard schema. This example shows the use of the Ecological Metadata Language (EML). 
   
+  Good metadata requires sufficient detail
+  to describe the collection process and to record decisions that were made during the
+  design phase about the use of different sampling methods. Time and effort may be saved
+  by considering metadata requirements at the commencement of a study, rather than trying
+  to recall all the details later. If metadata adheres to a standard schema, it can be used in
+  catalogues to enable fast searching and retrieval, or in machine-to-machine data queries
+  that assist data access and use.
+    
+  In EML the elements of any dataset can be seen as a nested hierarchy at three levels:
+   
+  1. The Project level: this is an overarching grouping of data.  It might be indicative of the principal investigator or organisation who provided the data, or a programme of research studies (sub-projects).
+  2. The Dataset level: this is a distinct grouping of data that might be organised around a particular time period or geographical region.
+  3. The Entity level: This grouping of data includes data files (such as tables in CSV or Excel, shapefiles and raster images) or documents (such as metadata descriptions or related publications). 
   
-  
-  ### Case study 2: Visualisation of methods steps using bespoke software
-  
-  The method step is the key atomic unit of a scientific pipeline.  It consists of inputs, outputs and a rationale for why the step is taken.
-  
-  A simple way to keep track of the steps, inputs and outputs is shown in Table \ref{tab:TableBasic}.
-  
-  ```{r results='asis', echo=FALSE}
-  library(stringr)
-  steps <- read.csv(textConnection('
-  CLUSTER ,  STEP    , INPUTS                  , OUTPUTS                   
-  A  ,  Step1      , "Input 1, Input 2"       , "Output 1"                 
-  A  ,  Step2      , Input 3                  , Output 2                   
-  B  ,  Step3      , "Output 1, Output 2"      , Output 3                  
-  '), stringsAsFactors = F, strip.white = T)
-  
-  #kable(
-  steps <- steps[,c("STEP", "INPUTS", "OUTPUTS")]
-  library(xtable)
-  #print(xtable(steps, caption = 'Simple', label = 'tab:TableBasic'), type = "html")
-  
-  
-  tabcode <- xtable(steps, caption = 'A simple table to track method steps, data inputs and outputs', label = 'tab:TableBasic')
-  align(tabcode) <-  c( 'l', 'p{.6in}','p{2in}','p{2in}' )
-  #sink(paste(fname, '.tex',sep = ""))
-  #cat(txt)
-  print(tabcode,  include.rownames = F, table.placement = '!h',
-   caption.placement = 'top', comment = F) #, type = "html")
-  #rws <- seq(1, (nrow(steps)), by = 2)
-  #col <- rep("\\rowcolor[gray]{0.95}", length(rws))
-  #print(tabcode, booktabs = TRUE, include.rownames = F, table.placement = '!ht',
-  # caption.placement = 'top',
-  # add.to.row = list(pos = as.list(rws), command = col),
-  # comment=FALSE)
-  
-  ```  
-  
-  The steps and data listed in Table \ref{tab:TableBasic} can be
-  visualised.  To achieve this an R function was written as part of this
-  PhD project and is distributed in the author\'s own R package
-  available on Github
-  (\url{https://github.com/ivanhanigan/disentangle}).  This is the
-  `newnode` function.  The function returns a string of text written in
-  the `dot` language which can be rendered in R using the `DiagrammeR`
-  package, or the standalone `graphviz` package.  This creates the graph
-  view shown in Figure \ref{fig:FigBasic}.  Note that a new field was
-  added for Descriptions as these are highly recommended.
-  
-  ```{r echo=T, eval=F}
-  library(disentangle); library(stringr); library(readxl)
-  steps <- read_excel("steps_basic_workflow.xlsx")
-  nodes <- newnode(indat = steps, names_col = "STEP",
-                   in_col = "INPUTS",out_col = "OUTPUTS")
-  DiagrammeR::grViz(nodes)
-  ```
-  
-  
-  
-  \begin{figure}[!ht]
-  \centering
-  \includegraphics[width=.5\textwidth]{fig-basic.pdf}
-  \caption{A graphical view of the steps that comprise a simple data analysis pipeline}
-  \label{fig:FigBasic}
-  \end{figure}
-  \clearpage
+  This conceptual framework can be very useful for the organisation of the work constituting a single pipeline, as well as when working with multiple pipelines within several projects.
+    
+  ![images/EML_project.png](images/EML_project.png)
 #+end_src
+
+
 * data storage and access
 ** Rmd
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
-  
-  ### Data storage and access 
+  ## Data storage and access 
   
   Some datasets such as sensitive personal information about suicide or
   climate change scenarios with restrictions due to privacy and
@@ -405,7 +397,7 @@
   presentation in this thesis, a range of available workflow tools for
   data management and analysis were investigated and developed.
   
-  ### Reports 
+  ## Reports 
   
   Reproducible research reports are written using a scripting language
   for statistical computing and graphics. The report is made up of
@@ -554,7 +546,7 @@ the consequences of catastrophes such as fire or flooding
   
   
   
-  ## Planning and implementing a pipeline
+  # Planning and implementing a pipeline
   
   It can be much easier to conceptualise a complicated data analysis
   method than to implement this as a reproducible research pipeline. The
@@ -564,18 +556,21 @@ the consequences of catastrophes such as fire or flooding
   person could 'audit' the procedure easily and access the details of
   the pipeline they need to scrutinise.
   
-  ### A standardised data analysis pipeline framework
+  ## A standardised data analysis pipeline framework
   
   One method that was selected for use in the papers of this thesis was
   the concept of the Load-Clean-Functions-Do (LCFD) framework.  This was
   first proposed by Josh Reich on the open-source software discussion
   forum called 'stack overflow' (http://stackoverflow.com/a/1434424),
   and then encoded into the 'makeProject' R package
-  (http://cran.r-project.org/web/packages/makeProject/makeProject.pdf).  The approach is demonstrated in case study 3 below.
+  (http://cran.r-project.org/web/packages/makeProject/makeProject.pdf).  The approach is demonstrated in case study 2 below.
   
   \clearpage
+#+end_src
+** Rmd case study 2 makeProject
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
 
-  ### Case study 3: Simple pipeline using the makeProject package 
+  ## Case study 2: Simple pipeline using the makeProject package 
   ```{r, eval = F}
   # in an interactive R session at the command line choose your project directory
   setwd("~/projects")   
@@ -661,7 +656,7 @@ the consequences of catastrophes such as fire or flooding
 ** COMMENT files files files
 
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no    
-  ### File organization and naming
+  ## File organization and naming
   
   In many stages of a pipeline, an analyst will want to include details
   of the settings or what dataset they started out with. Rather than
@@ -705,7 +700,7 @@ the consequences of catastrophes such as fire or flooding
   followed by the more fluid variables (or things that change more across the project). 
   List elements can then be ordered so that the groups of things that are similar will always be contiguous, and vary sequentially within clusters.
   
-  An example is shown in Table \ref{tab:TableFiles} to describe this and make it easier to understand.  Here is a set of file names that were constructed for an ecological field sites project that sampled plot-based measurement locations.  At the begining of the procedure a controlled vocabulary of data types and their acronyms was created.
+  An example is shown in Table \ref{tab:TableFiles} to describe this and make it easier to understand.  Here is a set of file names that were constructed for an ecological field sites project that the I worked on ([http://www.supersites.net.au/](http://www.supersites.net.au/)).  That project involved ecological data sampled at plot-based measurement locations.  At the begining of the procedure a controlled vocabulary of data types and their acronyms was created.
   
   
 #+end_src
@@ -713,7 +708,7 @@ the consequences of catastrophes such as fire or flooding
 #+name:snip
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
-  ```{r results='asis', echo=F}
+  ```{r results='asis', echo=F, eval = F}
   library(stringr)
   steps <- read.table(textConnection(
   "Filename                                                           \t Title                                                                                                                                 
@@ -744,6 +739,36 @@ the consequences of catastrophes such as fire or flooding
    caption.placement = 'top', comment = F) #, type = "html")
   
   ```
+
+  \begin{table}[!h]
+  \tiny
+  \centering
+  \caption{An example of standardised filename conventions to simplify tracking complicated datasets} 
+  \label{tab:TableFiles}
+  \begin{tabular}{p{3.3in}p{3in}}
+    \hline
+  Filename & Title \\ 
+    \hline
+  asn\_fnqr\_soil\_charact\_robson\_2011.csv & Soil Data, Far North Queensland Rainforest SuperSite, Robson Creek, 2011 \\ 
+    asn\_fnqr\_soil\_pit\_robson\_2012.csv & Soil Pit Data, Water Content and Temperature, Far North Queensland Rainforest SuperSite, Robson Creek, 2012 \\ 
+    asn\_fnqr\_veg\_seedling\_robson\_2010-2012.csv & Seedling Survey,  Far North Queensland Rainforest SuperSite, Robson Creek, 2010-2012 \\ 
+    asn\_fnqr\_veg\_seedling\_transect\_coord\_robson\_2010-2012.csv & Seedling Survey,  Far North Queensland Rainforest SuperSite, Robson Creek, 2010-2012 \\ 
+    asn\_fnqr\_core\_1ha\_robson\_2014.csv & Soil Pit Data, Soil Characterisation, Far North Queensland Rainforest SuperSite, Robson Creek, Core 1 ha plot, 2014 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_2012.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, 2012 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_2013.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, 2013 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_capetrib\_2014.csv & Avifauna Monitoring, Far North Queensland Rainforest SuperSite, Cape Tribulation, 2014 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu11a\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU11A, 2014 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu7a\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU7A, 2014 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu7b\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU7B, 2014 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu9a\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU9A, 2014 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc-lu11a\_2009-2011.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU11A, 2009-2011 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc-lu7a\_2009-2011.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU7A, 2009-2011 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_ctbcc-lu9a\_2009-2011.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU9A, 2009-2011 \\ 
+    asn\_fnqr\_fauna\_biodiversity\_habitat\_codes\_ctbcc-lu11a\_2009-2011.pdf & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU11A, 2009-2011 \\ 
+     \hline
+  \end{tabular}
+  \end{table}
+
   
   \clearpage
 #+end_src
@@ -765,14 +790,14 @@ the consequences of catastrophes such as fire or flooding
   
   
   
-  ## Visualisation techniques
+  # Visualisation techniques
   
-  ### Make a list of steps, inputs and outputs
+  ## Make a list of steps, inputs and outputs
   
   A very simple example of a pipeline is shown in Table
   \ref{tab:TablePipe1}.  The steps and data listed in Table
   \ref{tab:TablePipe1} can be visualised using the `newnode` function
-  described above in case study 2.  This creates the graph of this pipeline
+  described below in case study 3.  This creates the graph of this pipeline
   shown in Figure \ref{fig:FigSteps}.  As the analysis progresses
   through the phases of testing, refinement and final versions. The
   linked table and graphical depiction can be very helpful for reference
@@ -832,7 +857,7 @@ the consequences of catastrophes such as fire or flooding
   
   \begin{figure}[!h]
   \centering
-  \includegraphics[width=\textwidth]{steps-fig1.pdf}
+  \includegraphics[width=\textwidth]{images/steps-fig1.pdf}
   \caption{A visualisation of a data analysis pipeline showing the use of colour}
   \label{fig:FigSteps}
   \end{figure}
@@ -848,19 +873,90 @@ the consequences of catastrophes such as fire or flooding
   
   \begin{figure}[!h]
   \centering
-  \includegraphics[width=\textwidth]{envepi_data_pipeline.pdf}
+  \includegraphics[width=\textwidth]{images/envepi_data_pipeline.pdf}
   \caption{A schematic flow chart showing the steps required to prepare and
   conduct an analysis of health, environmental and social data.}       
   \label{fig:envepi_data_pipeline.png}
   \end{figure}
   
+  A high resolution version of this image is available online at [https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf](https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf)  
 
 #+end_src
+** Rmd Case study 3: Visualisation of methods steps using bespoke software
+#+name:box1
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  
+  
+  
+  
+  ## Case study 3: Visualisation of methods steps using bespoke software
+  
+  The method step is the key atomic unit of a scientific pipeline.  It consists of inputs, outputs and a rationale for why the step is taken.
+  
+  A simple way to keep track of the steps, inputs and outputs is shown in Table \ref{tab:TableBasic}.
+  
+  ```{r results='asis', echo=FALSE}
+  library(stringr)
+  steps <- read.csv(textConnection('
+  CLUSTER ,  STEP    , INPUTS                  , OUTPUTS                   
+  A  ,  Step1      , "Input 1, Input 2"       , "Output 1"                 
+  A  ,  Step2      , Input 3                  , Output 2                   
+  B  ,  Step3      , "Output 1, Output 2"      , Output 3                  
+  '), stringsAsFactors = F, strip.white = T)
+  
+  #kable(
+  steps <- steps[,c("STEP", "INPUTS", "OUTPUTS")]
+  library(xtable)
+  #print(xtable(steps, caption = 'Simple', label = 'tab:TableBasic'), type = "html")
+  
+  
+  tabcode <- xtable(steps, caption = 'A simple table to track method steps, data inputs and outputs', label = 'tab:TableBasic')
+  align(tabcode) <-  c( 'l', 'p{.6in}','p{2in}','p{2in}' )
+  #sink(paste(fname, '.tex',sep = ""))
+  #cat(txt)
+  print(tabcode,  include.rownames = F, table.placement = '!h',
+   caption.placement = 'top', comment = F) #, type = "html")
+  #rws <- seq(1, (nrow(steps)), by = 2)
+  #col <- rep("\\rowcolor[gray]{0.95}", length(rws))
+  #print(tabcode, booktabs = TRUE, include.rownames = F, table.placement = '!ht',
+  # caption.placement = 'top',
+  # add.to.row = list(pos = as.list(rws), command = col),
+  # comment=FALSE)
+  
+  ```  
+  
+  The steps and data listed in Table \ref{tab:TableBasic} can be
+  visualised.  To achieve this an R function was written as part of this
+  PhD project and is distributed in the author\'s own R package
+  available on Github
+  (\url{https://github.com/ivanhanigan/disentangle}).  This is the
+  `newnode` function.  The function returns a string of text written in
+  the `dot` language which can be rendered in R using the `DiagrammeR`
+  package, or the standalone `graphviz` package.  This creates the graph
+  view shown in Figure \ref{fig:FigBasic}.  Note that a new field was
+  added for Descriptions as these are highly recommended.
+  
+  ```{r echo=T, eval=F}
+  library(disentangle); library(stringr); library(readxl)
+  steps <- read_excel("steps_basic_workflow.xlsx")
+  nodes <- newnode(indat = steps, names_col = "STEP",
+                   in_col = "INPUTS",out_col = "OUTPUTS")
+  DiagrammeR::grViz(nodes)
+  ```
+  
+  
+  
+  \begin{figure}[!ht]
+  \centering
+  \includegraphics[width=.5\textwidth]{images/fig-basic.pdf}
+  \caption{A graphical view of the steps that comprise a simple data analysis pipeline}
+  \label{fig:FigBasic}
+  \end{figure}
+  \clearpage
+#+end_src
+
 * conc and refs
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
-  # Discussion and Conclusion
-
-  - TODO 
 
   # References
   
