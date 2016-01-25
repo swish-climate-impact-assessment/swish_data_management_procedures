@@ -1,4 +1,4 @@
-#+TITLE: Appendix 1: Evidence-based data analysis pipelines for eco-social epidemiology
+#+TITLE: Data management procedures for reproducible research pipelines 
 #+AUTHOR: Ivan Hanigan
 #+email: ivan.hanigan@anu.edu.au
 #+LaTeX_CLASS: article
@@ -31,15 +31,10 @@
 * head
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ---
-  title: "Appendix 1: Evidence-based data analysis pipelines for eco-social epidemiology"
-  date: \today
+  title: "Data management procedures for reproducible research pipelines"
   author:  
   - name: Ivan C. Hanigan
-    affilnum: 1
     email: ivan.hanigan@anu.edu.au  
-  affiliation:
-  - affilnum: 1
-    affil: Centre for Research and Action in Public Health, University of Canberra, ACT 2617, Australia
   header-includes:
     - \usepackage{graphicx}
     - \usepackage{url}   
@@ -97,6 +92,20 @@
    
   }
   ```
+  \vspace{2mm}\hrule
+  Unpublished working paper\\
+  Draft: \today
+  
+
+  \paragraph*{Abstract:} This unpublished working paper was written to
+  accompany the material included in the PhD thesis:
+  'Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors' by Ivan Hanigan (2016).  It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of heterogeneous datasets for analysis and reporting.
+  
+  The version submitted with the thesis is available as part of a Github repository at: 
+  
+  \vspace{3mm}\hrule
+  \doublespace
+  
 #+end_src
 
 * 2.1 intro to R epi 
