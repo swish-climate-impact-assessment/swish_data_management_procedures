@@ -26,7 +26,7 @@
 #+end_src  
 
 #+RESULTS:
-: /home/ivan_hanigan/projects/swish-dmp/report1_appendix_for_phd/swish-dmp-report.pdf
+: /home/ivan_hanigan/projects/swish-dmp/swish_data_management_procedures/swish-dmp-report.pdf
 
 * head
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
