@@ -361,7 +361,7 @@ Conventions used for writing these entries are:
   
 #+end_src
 * overarching data management system
-** Rmd DMP and datinv
+** DEPRECATED SEE PUBLIC GIT Rmd DMP and datinv
 #+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
   \clearpage
   # Overarching data management system  
@@ -407,7 +407,7 @@ Conventions used for writing these entries are:
   preservation and re-use into the future.
 
 #+end_src
-** Rmd Case study 1: EML and folder structure
+** DEPRECATED Rmd Case study 1: EML and folder structure
 #+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
 
   
