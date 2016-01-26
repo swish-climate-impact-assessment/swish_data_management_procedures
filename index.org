@@ -97,7 +97,6 @@
   
 #+end_src
   
-
 * Introduction Rmd
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
@@ -511,6 +510,10 @@ the consequences of catastrophes such as fire or flooding
   is understandable to the end user and as free from inconsistencies as
   possible.
 
+* TODO tracking the transformation from measured data to derived data
+- This chunk will talk about Step 4 of Borer: 'make corrections within a scripted language'
+- Data_provided and data_derived
+- Leap off from here into the discussion of Wide and Long, link to the EML discussion
 * table of steps
 #+name:pres
 #+begin_src R :session *R* :tangle no :exports none :eval no
