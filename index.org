@@ -9,7 +9,7 @@
 #+begin_src R :session *R* :tangle no :exports none :eval yes :padline yes
   
   # func
-  setwd("~/projects/swish-dmp/report1_appendix_for_phd")
+  setwd("~/projects/swish-dmp/swish_data_management_procedures")
   library(rmarkdown)
   library(knitr)
   library(knitcitations)
@@ -96,12 +96,26 @@
   \doublespace
   
 #+end_src
-\vspace{2mm}\hrule
   
-  \vspace{3mm}\hrule
+
+* Introduction Rmd
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
-* 2.1 intro to R epi 
-** snip-code
+  # Introduction
+  
+  There is a need for developing an evidence based set of best practice
+  guidelines for data management procedures in implementing reproducible
+  research pipelines in epidemiology `r citep(bib[["Peng"]])`.  The
+  examples drawn together in this report come from experiences and
+  use-cases found in an eco-social epidemiologic research context.  The
+  emerging paradigm of eco-social epidemiology is inherently concerned
+  with complex systems and integrating heterogenous data sources to aid
+  recognition of patterns in the environmental and social determinants
+  of population health `r citep(bib[["McMichael2013"]])`.  This document
+  outlines a suite of data management procedures that have been found to
+  effectively assist the development of reproducible research pipelines.
+#+end_src
+* snip-intro
 ## Introduction to reproducible epidemiological data science
   The details of the scientific questions that motivated the work on
   reproducibility are not included, however throughout the discussion
@@ -110,38 +124,46 @@
   the selection of the material included.  Other scientific disciplines
   may find different components of pipelines are required for specific
   data collection and management techniques. 
-** Rmd
+* Configuration versus convention: the case for standardised approaches  
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
-  # Introduction
-  
-  There is a need for developing an evidence based set of best practice
-  guidelines for data management procedures in implementing reproducible
-  research pipelines in epidemiology `r citet(bib[["Peng"]])`.  The
-  examples drawn together in this report come from experiences and
-  use-cases found in an eco-social epidemiologic research context.  The
-  emerging paradigm of eco-social epidemiology is inherently concerned
-  with complex systems and integrating heterogenous data sources to aid
-  recognition of patterns in the environmental and social determinants
-  of population health `r citet(bib[["McMichael2013"]])`.  This document
-  outlines a suite of data management procedures that have been found to
-  effectively assist the development of reproducible research pipelines.
-  
-  # Configuration versus convention: the case for standardised approaches  
+  # Configuration versus convention: The case for standardised approaches  
   
   Reproducibility is the ability to recompute the results of a data
   analysis with the original data.  It is possible to have analyses that
   are reproducible with varying degrees of difficulty. A data
   analysis might be reproducible but require thousands of hours of work.
-  A primary challenge to reproducible data analysis is to make analyses
+  A primary challenge for reproducible data analysis is to make analyses
   that are \emph{easy} to reproduce.
+
+  In essence this requires attention to be turned to the issue of how
+  the data and analytical steps amassed – toward a reality where this is
+  archived and there is a good understanding all round as to how the
+  study were set up and conducted.  Different assumptions or different
+  treatment of the data could conceivably lead to different inferences
+  and conclusions being drawn, such as in the example shown by `r citet(bib[["Silberzahn2015"]])` in which 29 research
+  teams were given the same dataset but reached a wide variety of
+  conclusions using different methods on the same dataset to answer the
+  same question.
+  
+  This is partly because of an underlying complexity in the information
+  drawn from complex systems involving multi-causality, and partly
+  because of different assumptions and different backgrounds and
+  viewpoints. A finding that a variable does or does not cause a
+  disease, might be drawn honestly from the same set of data.
+  
+  The techniques of pipelines described here are targeting the integrity
+  of the process of data selection, the robustness and suitableness of
+  the methods used, a commonsense and well-argued selection of health
+  outcomes and environmental or social exposures, and the clarity and
+  transparency of the methods used.
   
   To achieve this, a guiding principle is that analysts should
-  effectivly implement 'pipelines' of method steps and tools.  Data
-  analysts should employ standardised and evidence-based methods based
+  effectively implement 'pipelines' of method steps and tools.  
+  Standardised and evidence-based methods based
   on conventions developed from many data analysts approaching the
-  problems in a similar way, rather than each analyst configuring a
-  pipeline to suit a particular individual or domain-specific
+  problems in a similar way should be used, rather than each analyst configuring a
+  pipeline to suit particular individual or domain-specific
   preferences.
   
   `r citet(bib[["Noble2009"]])` points out that
@@ -151,12 +173,105 @@
   codifying what an appropriate pipeline would contain, data analysis
   will be more robust.  According to `r citet(bib[["Peng"]])`, there
   should not be a 'lonely data analyst' coming up with their own
-  method. If a researcher conducted an analysis using a reproducible
+  method. If a researcher conducted an analysis using an evidence-based reproducible research
   pipeline
   'you could at least have a sense that something reasonable was done'
   and be confident that you could easily check what had been done if you needed to.
 #+end_src
-** COMMENT snip-code
+* Core components of pipeline
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  ## The core components of a pipeline
+  As mentioned in chapter 1, `r citet(bib[["Peng2006"]])` distilled a core set of components for reproducibility from earlier work including that of `r citet(bib[["Schwab2000"]])`.  These are:
+  
+  - Hypothesis and design
+  - Data (measurement, pre-processing, analytic)
+  - Analysis Methods
+  - Documentation (of all steps)
+  - Distribution (of the paper, data and code).
+   
+  
+#+end_src
+* hypothesis and design
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  
+  ## Hypothesis and design
+  
+  The first stage of the pipeline is hypothesis generation and study
+  design.  In this stage documentation should explain the literature
+  base supporting the study, the decisions made in selection of explanatory
+  factors for inclusion, decisions made such as the experimental unit,
+  observational unit, measurement method, as well as spatial or temporal
+  extent.  This information will also be needed for ethical review and approval.
+#+end_src
+* data
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  
+  ## Data
+  
+  The data that were measured should be well managed, however the
+  requirements for accessing the original raw data are less important
+  than for the analytical dataset.  Descriptions of how the measured
+  data were transformed into the analytic data should be available.
+  Public data repositories or institutional services such as university
+  libraries should be used to ensure longevity of the data storage.  
+#+end_src
+* methods
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  
+  ## Methods
+  
+  The software code underlying the principal
+  results needs to be made available. In
+  addition, the computer environment necessary to execute that code should be
+  described adequately to 'deploy' a new computer set-up
+  that can reproduce the computations needed.
+#+end_src
+* documentation
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  
+  ## Documentation
+  
+  Adequate documentation of the code and
+  data should be available to enable others to repeat the
+  analyses and to conduct other similar ones.  This can take the form of metadata, reports, journal papers or even books `r citep(bib[["Peng2008a"]])`. Indeed textbooks on statistical methods can benefit greatly from being accompanied by data and analytical code to enhance their pedagogic functions `r citep(c(bib[["Barnett2015"]], bib[["Barnett2010"]]))`.
+  
+  An important underpinning to reproducible research is the
+  reproducible report.  This is the ultimate form of documentation
+  because the information that represents the outputs of the research is
+  written alongside the code that performs the computations that are
+  being described.  There has been many recent advances made in terms of
+  tools for reproducible reports such as R markdown and knitr `r citep(bib[["Xie2014a"]])`.
+  
+  Metadata should be created and maintained as a priority task at all
+  stages of the data analysis process.  An international standard should
+  be preferred over selectively choosing what information one collects
+  and what fieldnames one uses to describe each item of documentation.
+  Ecological Metadata Language (EML) and the Data Documentation
+  Inititative (DDI) are two such standards that offer useful semantic
+  constructs for describing epidemiological data.
+#+end_src
+* distribution
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
+  
+  ## Distribution
+  
+  Distribution or dissemination of the material needs to use a standard
+  method if they are to be used by others.  It is not enough just to
+  provide access to the software and data, but also adequate
+  documentation is required to explain and potentially assist downstream
+  users to piece these together.
+  
+#+end_src
+
+* snip distro
+#+begin_src R :session *R* :tangle no :exports none :eval no
+  ## Distributing data, code and documentation
+  
+  - This section is still TODO
+  - Sharing computer code via Github
+  - Publishing well documented data with metadata in a standard format (EML, DDI, ANZLIC)
+#+end_src
+* COMMENT snip rationale
 #+name:snip
 #+begin_src R :session *R* :tangle no :exports none :eval no
   #### name:snip ####
@@ -184,99 +299,8 @@
 
 
 #+end_src
-** Core components of pipeline
-#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
-  ## The core components of a pipeline
-  As mentioned in chapter 1, `r citet(bib[["Peng2006"]])` distilled a core set of components for reproducibility from earlier work including that of `r citet(bib[["Schwab2000"]])`.  These are:
-  
-  - Hypothesis and design
-  - Data (measurement, pre-processing, analytic)
-  - Analysis Methods
-  - Documentation (of all steps)
-  - Distribution (of the paper, data and code).
-   
-  In essence this requires attention to be turned to the issue of how
-  the data and analytical steps amassed – toward a reality where this is
-  archived and there is a good understanding all round as to how the
-  study were set up and conducted.  Different assumptions or different
-  treatment of the data could conceivably lead to different inferences
-  and conclusions being drawn, such as in the example where 29 research
-  teams were given the same dataset but reached a wide variety of
-  conclusions using different methods on the same data set to answer the
-  same question (about football players’ skin colour and red cards)
-  `r citep(bib[["Silberzahn2015"]])`.
-  
-  This is partly because of an underlying complexity in the information
-  drawn from complex systems involving multi-causality, and partly
-  because of different assumptions and different backgrounds and
-  viewpoints. A finding that a variable does or does not cause a
-  disease, might be drawn honestly from the same set of data.
-  
-  The techniques of pipelines described here are targeting the integrity
-  of the process of data selection, the robustness and suitableness of
-  the methods used, a commonsense and well-argued selection of health
-  outcomes and environmental or social exposures, and the clarity and
-  transparency of the assumptions made.
-  
-  
-  ## Hypothesis and design
-  
-  The first stage of the pipeline is hypothesis generation and study
-  design.  In this stage documentation should explain the literature
-  base supporting the study, the decisions made in selection of explanatory
-  factors for inclusion, decisions made such as the experimental unit,
-  observational unit, measurement method, as well as spatial or temporal
-  extent.  This information will also be needed for ethical review and approval.
-  
-  ## Data
-  
-  The data that were measured should be well managed, however the
-  requirements for accessing the original raw data are less important
-  than for the analytical dataset.  Descriptions of how the measured
-  data were transformed into the analytic data should be available.
-  Public data repositories or institutional services such as university
-  libraries should be used to ensure longevity of the data storage.  
-  
-  ## Methods
-  
-  The software code underlying the principal
-  results needs to be made available. In
-  addition, the computer environment necessary to execute that code should be
-  described adequately to 'deploy' a new computer set-up
-  that can reproduce the computations needed.
-  
-  ## Documentation
-  
-  Adequate documentation of the code and
-  data should be available to enable others to repeat the
-  analyses and to conduct other similar ones.  This can take the form of metadata, reports, journal papers or even books `r citep(bib[["Peng2008a"]])`. Indeed textbooks on statistical methods can benefit greatly from being accompanied by data and analytical code to enhance their pedagogic functions `r citep(c(bib[["Barnett2015"]], bib[["Barnett2010"]]))`.
-  
-  An important underpinning to reproducible research is the
-  reproducible report.  This is the ultimate form of documentation
-  because the information that represents the outputs of the research is
-  written alongside the code that performs the computations that are
-  being described.  There has been many recent advances made in terms of
-  tools for reproducible reports such as R markdown and knitr `r citep(bib[["Xie2014a"]])`.
-  
-  Metadata should be created and maintained as a priority task at all
-  stages of the data analysis process.  An international standard should
-  be preferred over selectively choosing what information one collects
-  and what fieldnames one uses to describe each item of documentation.
-  Ecological Metadata Language (EML) and the Data Documentation
-  Inititative (DDI) are two such standards that offer useful semantic
-  constructs for describing epidemiological data.
-  
-  ## Distribution
-  
-  Distribution or dissemination of the material needs to use a standard
-  method if they are to be used by others.  It is not enough just to
-  provide access to the software and data, but also adequate
-  documentation is required to explain and potentially assist downstream
-  users to piece these together.
-  
-#+end_src
-* 2.2 fundamentals
-** Rmd procedures of a RRP 
+
+* procedures of a RRP 
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -293,7 +317,7 @@
   - Distributing the materials.
 
 #+end_src
-** Rmd Data management plan and data inventory
+* Data management plan and data inventory
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
     
   ## Data management plan and data inventory
@@ -340,7 +364,7 @@
   
   
 #+end_src
-** Rmd Case study 1: EML and folder structure
+* Case study 1: EML and folder structure
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
 
     
@@ -372,7 +396,7 @@
 
 
 * data storage and access
-** Rmd
+
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   ## Data storage and access 
   
@@ -396,6 +420,9 @@
   address this issue. In the work reported in the conference
   presentation in this thesis, a range of available workflow tools for
   data management and analysis were investigated and developed.
+#+end_src
+* reports
+#+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   ## Reports 
   
@@ -415,7 +442,7 @@
    
   
 #+end_src
-** DONE rational for naming and shaming Dr Begg
+* DONE rational for naming and shaming Dr Begg
 Hi Steve,
 
 Good point, I actually want to attribute this data misuse to the researchers not the school.
@@ -452,8 +479,8 @@ On Thu, Dec 3, 2015 at 10:00 AM, Steven McEachern <steven.mceachern@anu.edu.au> 
     Cheers,
     Steve
 
-* snip-code
-** snip
+* snip-code backups security and the role of RRR in EDA and QC
+
 Who decides?  In many cases people preserve data 'in case' and, if
   so, some of it turn out to be considered junk that later causes a
   problem. 
@@ -485,11 +512,10 @@ the consequences of catastrophes such as fire or flooding
   is understandable to the end user and as free from inconsistencies as
   possible.
 
-** pres
-*** COMMENT pres1
+* table of steps
 #+name:pres
 #+begin_src R :session *R* :tangle no :exports none :eval no
-  #### name:pres ####
+    
     library(stringr)
     steps <- read.csv(textConnection('
     CLUSTER ,  STEP    , INPUTS                  , OUTPUTS                   
@@ -497,9 +523,9 @@ the consequences of catastrophes such as fire or flooding
     A  ,  Step2      , Input 3                  , Output 2                   
     B  ,  Step3      , "Output 1, Output 2"      , Output 3                  
     '), stringsAsFactors = F, strip.white = T)
-  write.csv(steps, "steps_basic_workflow.csv", row.names = F)
+    write.csv(steps, "steps_basic_workflow.csv", row.names = F)
 #+end_src
-** COMMENT steps_basic_workflow
+* COMMENT steps_basic_workflow
 #+name:steps_basic_workflow
 #+begin_src R :session *R* :tangle steps_basic_workflow.R :exports none :eval no
   library(disentangle); library(stringr); library(readxl)
@@ -508,40 +534,9 @@ the consequences of catastrophes such as fire or flooding
                    in_col = "INPUTS",out_col = "OUTPUTS")
   DiagrammeR::grViz(nodes)
   
-  
 #+end_src
 
-* 2.3 DEPRECATED, ALREADY DISCUSSED distro
-#+begin_src R :session *R* :tangle no :exports none :eval no
-  ## Distributing data, code and documentation
-  
-  - This section is still TODO
-  - Sharing computer code via Github
-  - Publishing well documented data with metadata in a standard format (EML, DDI, ANZLIC)
-#+end_src
-* 2.4 NOT NEEDED planning
-#+begin_src R :session *R* :tangle no :exports none :eval no
-
-
-  
-  ## Planning a pipeline
-  
-  - This section is still TODO
-  
-  The ordering of the process is roughly (after `r citet(bib[["Peng"]])`):
-  
-  1. Decide on a research question 
-  1. Select a modelling framework 
-  1. Conceptualise the ideal analysis data
-  1. Acquire and pre process the measured data 
-  1. Model selection
-  1. Sensitivity analysis
-  1. Data checking
-  1. Reporting
-  1. Distribution of code and data.
-#+end_src
-* 2.5 implement
-** Rmd
+* planning and implementing a pipeline
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -567,7 +562,28 @@ the consequences of catastrophes such as fire or flooding
   
   \clearpage
 #+end_src
-** Rmd case study 2 makeProject
+* notes on planning (peng)
+#+begin_src R :session *R* :tangle no :exports none :eval no
+
+
+  
+  ## Planning a pipeline
+  
+  - This section is still TODO
+  
+  The ordering of the process is roughly (after `r citet(bib[["Peng"]])`):
+  
+  1. Decide on a research question 
+  1. Select a modelling framework 
+  1. Conceptualise the ideal analysis data
+  1. Acquire and pre process the measured data 
+  1. Model selection
+  1. Sensitivity analysis
+  1. Data checking
+  1. Reporting
+  1. Distribution of code and data.
+#+end_src
+* case study 2 makeProject
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
 
   ## Case study 2: Simple pipeline using the makeProject package 
@@ -598,7 +614,7 @@ the consequences of catastrophes such as fire or flooding
   rmarkdown::render("My-Pipeline-Report.Rmd", "pdf_document")
   ```
 #+end_src
-** COMMENT snip
+* COMMENT snip more complicated workflows
 #+name:snip
 #+begin_src R :session *R* :tangle no :exports none :eval no
   ### More complicated pipeline framework for data analysis
@@ -653,8 +669,7 @@ the consequences of catastrophes such as fire or flooding
   ```
 #+end_src
 
-** COMMENT files files files
-
+* File organization and naming
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no    
   ## File organization and naming
   
@@ -704,7 +719,7 @@ the consequences of catastrophes such as fire or flooding
   
   
 #+end_src
-** COMMENT snip
+* Code for exemplar on file naming
 #+name:snip
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
@@ -772,7 +787,7 @@ the consequences of catastrophes such as fire or flooding
   
   \clearpage
 #+end_src
-** snip-code
+* snip-key issues
 
 ### Key issues
 
@@ -783,9 +798,8 @@ the consequences of catastrophes such as fire or flooding
 - Concern is how to deal with in house data before you start your analysis, this is critical for reproducible research - so that you could go back and reproduce your analysis
 - Recommended by some is 'convention over configuration' advice, and links to evidence based recommended filing systems. 
 
-* 2.6 viz
-** TODO make better fit on A4 sheet, explain each of the main pathways in this pipeline, link to web version, put table in appendix
-** vis
+* Visualisation techniques
+
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -882,8 +896,7 @@ the consequences of catastrophes such as fire or flooding
   A high resolution version of this image is available online at [https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf](https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf)  
 
 #+end_src
-** Rmd Case study 3: Visualisation of methods steps using bespoke software
-#+name:box1
+* Case study 3: Visualisation of methods steps using bespoke software
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -955,10 +968,10 @@ the consequences of catastrophes such as fire or flooding
   \clearpage
 #+end_src
 
-* conc and refs
+* refs
 #+begin_src R :session *R* :tangle swish-dmp-report.Rmd :exports none :eval no
 
-  # References
+  # References for appendix 1
   
   ```{r, echo=FALSE, message=FALSE, eval = T}
   write.bibtex(file="references.bib")
