@@ -9,7 +9,271 @@
 - phd appendix is not as polished as I would like, so leave that as a side branch
 - future development will move forward on master branch
 * worklog
-** TODO 2016-01-26 notes re: wide data, long data and the EML package
+** TODO 2016-01-26 note re: automating boilerplate EML for wide data
+*** COMMENT go
+#+name:go
+#+begin_src R :session *R* :tangle no :exports none :eval yes
+#### name:go ####
+  setwd("~/projects/swish-dmp/notes")
+  rmarkdown::render("automating_boilerplate_EML_for_wide_data.Rmd", "html_document")  
+  #browseURL("automating_boilerplate_EML_for_wide_data.html")
+
+#+end_src
+
+#+RESULTS: go
+: /home/ivan_hanigan/projects/swish-dmp/notes/automating_boilerplate_EML_for_wide_data.html
+
+*** COMMENT notes/automating_boilerplate_EML_for_wide_data
+#+name:notes/automating_boilerplate_EML_for_wide_data
+#+begin_src R :session *R* :tangle notes/automating_boilerplate_EML_for_wide_data.Rmd :exports none :eval no
+  ---
+  title: "notes re automating_boilerplate_EML_for_wide_data"
+  ---
+  
+  # Introduction
+  I am re-opening this pull request, more as a 'request-for-comment' than as an additional feature of the EML package.  I don't have the R packaging/travis etc skills (or the time to develop them) to adequately meet the requirements for code contributions.  So I thought I'd write to you and describe the function I was trying to develop, and how I used it when publishing many wide datasets to a metacat portal.
+  
+  Some time ago I wrote a function that automated the steps needed for entering repetitive metadata when one has a 'wide' dataset.  
+  
+  
+  I was trying to address the issue you refer to in the script [https://github.com/ropensci/EML/blob/master/manuscripts/one-simple-way.Rmd](https://github.com/ropensci/EML/blob/master/manuscripts/one-simple-way.Rmd), and I would like to contribute some information that relates to the following point, primarily around Line 234: [https://github.com/ropensci/EML/blame/master/manuscripts/one-simple-way.Rmd#L234](https://github.com/ropensci/EML/blame/master/manuscripts/one-simple-way.Rmd#L234)
+  
+  Firstly I believe there is a typo in this section and you mean to say 'observations for a single site added as additional _columns_' rather than '_rows_' as it currently reads.  More rows would make it long. I am pretty sure you mean to imply that researchers add columns for new observations from a site.
+  
+  
+  ```
+  many researchers are still tempted to present data in "wide" format,
+  with observations for a single site added as additional rows (sic). While
+  potentially convenient for field entry, the long format is more
+  desirable for most future analysis or reuse.
+  
+  The EML package addresses this by both working in the R an environment
+  where it is easy and routine to transform between "long" and "wide"
+  formats, while also giving the user the flexibility to simply document
+  the data in whatever format they feel works best for their analysis.
+  ```
+  
+  
+  Second, I would like to explore the claim that the EML package addresses this issue by a) 'working in R where it is easy to transform' and b) also 'gives flexibility to document the data in whatever format they feel works best'.  I would like to explore these two propositions using some data that provided the motivating use case for me to develop the function mentioned above, and ask for your advice on whether this was a sensible approach, and if so what I might do with it now.
+  
+  ## The use case example: Fire with season and frequency 
+  
+  In the example of using my function I would like to show one of the datasets that led me to develop the function in the first place.  It comes from the following data package:
+  
+  Russell-Smith, J; Darwin Centre for Bushfires Research, Charles Darwin
+  University; Director of National Parks (Parks Australia); Parks and
+  Wildlife Commission of the Northern Territory (2015): Three Parks
+  Savanna Fire-effects Plot Network: Plot-based Fire Severity
+  Associations with Season and Frequency, Kakadu, Litchfield and
+  Nitmiluk National Parks, Northern Territory, Australia,
+  1994–2013. Long Term Ecological Research
+  Network. [http://www.ltern.org.au/knb/metacat/ltern.102/html](http://www.ltern.org.au/knb/metacat/ltern.102/html). Accessed
+  on 26/1/2016.  
+  
+  Having downloaded the data (they require you to log on first) you can see that there is one long dataset and one wide dataset.  The source data are kept in wide format for precisely the reason you state above, namely that the researchers find it preferable to add a new column after each field season rather than to convert their data to long format.  The issue arose when these data were provided for publication at the data portal and the structure of this file made preparation of metadata difficult in the `morpho` software (by which I mean slow and error-prone).  The following code chunk shows the use of my function and your EML package to quickly generate the required EML for each column in this spreadsheet.
+#+end_src
+*** COMMENT code
+#+name:notes/automating_boilerplate_EML_for_wide_data
+#+begin_src R :session *R* :tangle notes/automating_boilerplate_EML_for_wide_data.Rmd :exports none :eval no
+  
+  ```{r}
+  projdir <- "~/projects/Biodiversity_and_environmental_change_LTERN/fire_season_and_frequency/"
+  setwd(projdir)
+  indir <- "data_provided"
+  infile <- "tps_fire_severity_p366_combined_qc_reshape_wide.csv"
+  dat <- read.csv(file.path(indir, infile), as.is = T)
+  ncol(dat)
+  # 57 columns in morpho is a pain, and also error prone
+  # just show the first 5 and last 5 columns to get a feel for the data
+  str(dat[,c(1:5)])
+  ## 'data.frame':        219 obs. of  5 variables:
+  ##  $ plot       : chr  "KAKFIRE_1" "KAKFIRE_10" "KAKFIRE_100" "KAKFIRE_11" ...
+  ##  $ x1994_a_wet: int  0 0 0 0 0 0 0 0 0 0 ...
+  ##  $ x1995_a_wet: chr  "0" "0" "0" "0" ...
+  ##  $ x1995_b_eds: chr  "0" "1" "0" "0" ...
+  ##  $ x1995_c_lds: chr  "0" "0" "0" "0" ...
+  
+  str(dat[, c((ncol(dat) - 5):ncol(dat))])
+  ## 'data.frame':        219 obs. of  6 variables:
+  ##  $ x2011_c_lds: chr  NA NA NA NA ...
+  ##  $ x2012_a_wet: int  NA NA NA NA NA NA NA NA NA NA ...
+  ##  $ x2012_b_eds: chr  NA "U" "U" "2" ...
+  ##  $ x2012_c_lds: chr  NA NA "U" "U" ...
+  ##  $ x2013_b_eds: chr  NA NA NA NA ...
+  ##  $ x2013_c_lds: chr  NA NA NA NA ...
+  
+  
+  # the function I wrote to automate this
+  library(downloader)
+  download("https://raw.githubusercontent.com/ivanhanigan/EML/devel/R/eml_boilerplate.R",
+    "eml_boilerplate.R")
+  source("eml_boilerplate.R")
+  library(EML)
+  
+  outfile <- file.path("data_derived", gsub(".csv", "2.csv", infile))
+  outeml <- file.path("data_derived", gsub(".csv", "2.xml", infile))
+  
+  unit_defs <- eml_boilerplate(dat, enumerated = NA)
+  col_defs <- names(dat)
+  ds <- eml_dataTable(dat,
+                col.defs = col_defs,
+                unit.defs = unit_defs,
+                description = "TBA", 
+                filename = outfile)
+  # now write EML metadata file
+  eml_config(creator="TBA")
+  eml_write(ds,
+            file = outeml,
+            title = "TBA"
+  )
+  ```
+  
+  This has produced an EML with the columns entered as numeric or character depending on how the CSV was imported, as we saw above 2012_a_wet was seen as numeric whereas 2012_b_eds was seen as text.  The function also recognises if a variable is stored as a date format.
+  
+  ```
+          <attribute>
+            <attributeName>x2012_a_wet</attributeName>
+            <attributeDefinition>x2012_a_wet</attributeDefinition>
+            <measurementScale>
+              <ratio>
+                <unit>
+                  <standardUnit>number</standardUnit>
+                </unit>
+                <numericDomain>
+                  <numberType>real</numberType>
+                </numericDomain>
+              </ratio>
+            </measurementScale>
+          </attribute>
+          <attribute>
+            <attributeName>x2012_b_eds</attributeName>
+            <attributeDefinition>x2012_b_eds</attributeDefinition>
+            <measurementScale>
+              <nominal>
+                <nonNumericDomain>
+                  <textDomain>
+                    <definition>TBA</definition>
+                  </textDomain>
+                </nonNumericDomain>
+              </nominal>
+            </measurementScale>
+          </attribute>
+  
+  ```
+  
+  So that was quick and dirty.  What I needed to also do was ensure that all columns are character (because in seasons where only the fire severity score '1' is observed, this is imported as numeric), and running this again I can also specify that all columns after the first one are enumerated values which will also write out the levels of each:
+  
+  ```
+  # convert to character
+  for(i in 2:57){
+    dat[,i] <- as.character(dat[,i])
+  }
+  # create unit defs, but look at the levels of the enumerated values too
+  unit_defs <- eml_boilerplate(dat, enumerated = 2:57)
+  col_defs <- names(dat)
+  ds <- eml_dataTable(dat,
+                col.defs = col_defs,
+                unit.defs = unit_defs,
+                description = "TBA", 
+                filename = outfile)
+  # now write EML metadata file
+  eml_config(creator="TBA")
+  eml_write(ds,
+            file = outeml,
+            title = "TBA"
+  )
+  
+  ```
+  
+  This achieves the following XML which is pretty close to what we wanted:
+  
+  ```
+          <attribute>
+            <attributeName>x2012_a_wet</attributeName>
+            <attributeDefinition>x2012_a_wet</attributeDefinition>
+            <measurementScale>
+              <nominal>
+                <nonNumericDomain>
+                  <textDomain>
+                    <definition>TBA</definition>
+                  </textDomain>
+                </nonNumericDomain>
+              </nominal>
+            </measurementScale>
+          </attribute>
+          <attribute>
+            <attributeName>x2012_b_eds</attributeName>
+            <attributeDefinition>x2012_b_eds</attributeDefinition>
+            <measurementScale>
+              <nominal>
+                <nonNumericDomain>
+                  <enumeratedDomain>
+                    <codeDefinition>
+                      <code>x1</code>
+                      <definition>TBA</definition>
+                    </codeDefinition>
+                    <codeDefinition>
+                      <code>x2</code>
+                      <definition>TBA</definition>
+                    </codeDefinition>
+                    <codeDefinition>
+                      <code>x3</code>
+                      <definition>TBA</definition>
+                    </codeDefinition>
+                    <codeDefinition>
+                      <code>u</code>
+                      <definition>TBA</definition>
+                    </codeDefinition>
+                  </enumeratedDomain>
+                </nonNumericDomain>
+              </nominal>
+            </measurementScale>
+          </attribute>
+  ```  
+  
+  Well, I actually wanted it to define the value of '2' for the 2012_a_wet variable, but you can see it has extracted the levels of fire severity in 2012_b_eds.  However this is not exactly what we want because in this specific case it would be more desirable to explicitly describe every possible level of the enumerated values, even in seasons where not every fire type was observed.  We achieved this by constructing a dummy dataset where every column contained an observation with every possible value from the fire severity index.  And then swapping the correct data file back in when uploading the EML to metacat.  It would have been nice to have allowed for some additionaly inputs by the user to specify not only which columns are enumerated values, but also the full extent of possible observations, rather than just extract the levels that were actually observed.
+  
+  ## Results
+  
+  This has achieved my main goal of speeding up the creation of EML for wide formatted data to meet the desire of the researcher to keep the data in this format.  I think this addresses the point (B) above that the EML package gives the flexibility to create of the EML for whatever format the researcher feels works best, and my function is a lot faster and less error-prone than morpho.
+  
+  Point (A) above is of course true and if you click through to the published data at [http://www.ltern.org.au/knb/metacat/ltern.102/html](http://www.ltern.org.au/knb/metacat/ltern.102/html) you will see we also published the long version of these data (with the addition of a variable for date and also for time since last file), having used the same 'boilerplate' function in the following way:
+  
+  ```
+  library(reshape)
+  dat2 <- melt(dat, c("plot"))
+  str(dat2)
+  ## 'data.frame':        12264 obs. of  3 variables:
+  ##  $ plot    : chr  "KAKFIRE_1" "KAKFIRE_10" "KAKFIRE_100" "KAKFIRE_11" ...
+  ##  $ variable: Factor w/ 56 levels "x1994_a_wet",..: 1 1 1 1 1 1 1 1 1 1 ...
+  ##  $ value   : Factor w/ 6 levels "0","1","2","B",..: 1 1 1 1 1 1 1 1 1 1 ...
+  
+  # My function is also quite handy even with long data because it saves a bit of typing
+  unit_defs <- eml_boilerplate(dat2, enumerated = 3)
+  unit_defs
+  ## $plot
+  ## [1] "TBA"
+  
+  ## $variable
+  ## [1] "TBA"
+  
+  ## $value
+  ##    x0    x1    x2     b     u    x3 
+  ## "TBA" "TBA" "TBA" "TBA" "TBA" "TBA" 
+   
+  ```
+    
+  
+  ## Future directions?
+  
+  - I no longer work at the Australian LTER plot networks data portal, so the motivating use case of quickly producing EML has reduced.  I still work in the area of integrating and synthesising heterogenous datasets (for eco-epidemiology now) so I would still like to build my tool kit around the EML package.
+  - But I don't want to develop this function any further in the near future.
+  - I think it is a useful tool though, but is probably not destined to be part of the core features of the EML package. Perhaps it might be available as an unstable EML-helper or add-in?  
+  - I would value your advice and comments about the approach I have taken and what I might do with this stuff in the future.
+  
+#+end_src
+
+
 
 * PhD appendix (make sure you are on PhD branch in subfolder)
 ** Run the Rmd
