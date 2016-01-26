@@ -50,7 +50,7 @@
     word_document: null
   fontsize: 11pt
   capsize: normalsize
-  csl: meemodified.csl
+  csl: components/meemodified.csl
   documentclass: article
   classoption: a4paper
   spacing: singlespacing
@@ -135,7 +135,7 @@
   analysis might be reproducible but require thousands of hours of work.
   A primary challenge for reproducible data analysis is to make analyses
   that are \emph{easy} to reproduce.
-
+  
   In essence this requires attention to be turned to the issue of how
   the data and analytical steps amassed – toward a reality where this is
   archived and there is a good understanding all round as to how the
@@ -159,12 +159,11 @@
   transparency of the methods used.
   
   To achieve this, a guiding principle is that analysts should
-  effectively implement 'pipelines' of method steps and tools.  
-  Standardised and evidence-based methods based
-  on conventions developed from many data analysts approaching the
-  problems in a similar way should be used, rather than each analyst configuring a
-  pipeline to suit particular individual or domain-specific
-  preferences.
+  effectively implement 'pipelines' of method steps and tools.
+  Standardised and evidence-based methods based on conventions developed
+  from many data analysts approaching the problems in a similar way
+  should be used, rather than each analyst configuring a pipeline to
+  suit particular individual or domain-specific preferences  `r citep(c(bib[["Borer2009a"]],bib[["White2013b"]]))`.
   
   `r citet(bib[["Noble2009"]])` points out that
   'the principles behind organizing and documenting computational experiments are often learned on the fly, and this learning is strongly influenced by personal predilections'.
