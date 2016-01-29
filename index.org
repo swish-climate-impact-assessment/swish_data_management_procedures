@@ -6,8 +6,9 @@
 #+LATEX: \tableofcontents
 -----
 * workplan
-- phd appendix is not as polished as I would like, so leave that as a side branch
-- future development will move forward on master branch
+- first finalise the doc for phd appendix = version 1.0
+- then work toward generic document for UCRH, CeRAPH, NCEPH etc = version 2.0
+- work toward a book like Scott Long = version 3.0
 * worklog
 ** TODO 2016-01-26 note re: automating boilerplate EML for wide data
 *** COMMENT go
@@ -274,10 +275,12 @@
 #+end_src
 
 
-
-* PhD appendix (make sure you are on PhD branch in subfolder)
+** TODO 2016-01-28 note re: versions, branchs and releases like Driessen 2010
+Driessen, V. (2010). A successful Git branching model. Nvie.Com. Retrieved January 28, 2016, from http://nvie.com/posts/a-successful-git-branching-model/
+- setup develop vs master, might not even need release-branches yet?
+* header
 ** Run the Rmd
-#+begin_src R :session **R** :tangle no :exports none :eval yes :padline yes
+#+begin_src R :session *R* :tangle no :exports none :eval yes :padline yes
   
   # func
   setwd("~/projects/swish-dmp/swish_data_management_procedures")
@@ -292,24 +295,24 @@
   
   #rmarkdown::render("swish-dmp-report.Rmd", "html_document")  
   rmarkdown::render("swish-dmp-report.Rmd", "pdf_document")
-  # browseURL("swish-dmp-report.pdf")
+   browseURL("swish-dmp-report.pdf")
   # browseURL("swish-dmp-report.html")
 #+end_src  
 
 #+RESULTS:
-: /home/ivan_hanigan/projects/swish-dmp/swish_data_management_procedures/swish-dmp-report.pdf
+: 0
 
 ** head
 
 #+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
   ---
   title: "Data management procedures for reproducible research pipelines"
-  author:  
-  - name: Ivan C. Hanigan
-    email: ivan.hanigan@anu.edu.au  
   header-includes:
     - \usepackage{graphicx}
     - \usepackage{url}   
+    - \usepackage{hyperref}
+    - \usepackage{tikz}
+    - \usetikzlibrary{calc}
   output:
     pdf_document:
       fig_caption: yes
@@ -327,7 +330,7 @@
   spacing: singlespacing
   linenumbers: no
   bibliography: references.bib
-  abstract:   This unpublished working paper was written to  accompany the material included in the PhD thesis 'Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors' by Ivan Hanigan (2016).  It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of heterogeneous datasets for analysis and reporting.  The draft was last updated \today. The version submitted with the thesis is available as part of a Github repository at [https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/swish-dmp-report.pdf](https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/swish-dmp-report.pdf).
+  abstract:   This unpublished working paper was written to  accompany the material included in the PhD thesis 'Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors' by Ivan Hanigan (2016).  It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of heterogeneous datasets for analysis and reporting.  The draft was last updated \today. The version submitted with the thesis is available as part of a Github repository at [https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/master/swish-dmp-report.pdf](https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/master/swish-dmp-report.pdf).
   
   ---
   
@@ -450,7 +453,7 @@
 ** Core components of pipeline
 #+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
   ## The core components of a pipeline
-  As mentioned in chapter 1, `r citet(bib[["Peng2006"]])` distilled a core set of components for reproducibility from earlier work including that of `r citet(bib[["Schwab2000"]])`.  These are:
+  `r citet(bib[["Peng2006"]])` distilled a core set of components for reproducibility from earlier work including that of `r citet(bib[["Schwab2000"]])`.  These are:
   
   - Hypothesis and design
   - Data (measurement, pre-processing, analytic)
@@ -569,7 +572,7 @@
 
 #+end_src
 
-** procedures of a RRP 
+** TODO procedures of a RRP 
 #+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
   
   
@@ -690,6 +693,7 @@
   presentation in this thesis, a range of available workflow tools for
   data management and analysis were investigated and developed.
 #+end_src
+
 ** reports
 #+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
   
@@ -1071,6 +1075,11 @@ the consequences of catastrophes such as fire or flooding
 - Concern is how to deal with in house data before you start your analysis, this is critical for reproducible research - so that you could go back and reproduce your analysis
 - Recommended by some is 'convention over configuration' advice, and links to evidence based recommended filing systems. 
 
+** filing
+
+#+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
+## filing
+#+end_src
 ** Visualisation techniques
 
 #+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
@@ -1244,7 +1253,7 @@ the consequences of catastrophes such as fire or flooding
 ** refs
 #+begin_src R :session **R** :tangle swish_data_management_procedures/swish-dmp-report.Rmd :exports none :eval no
 
-  # References for appendix 1
+  # References for appendix 2
   
   ```{r, echo=FALSE, message=FALSE, eval = T}
   write.bibtex(file="references.bib")
