@@ -5,6 +5,8 @@
 #+LaTeX_CLASS_OPTIONS: [a4paper]
 #+LATEX: \tableofcontents
 -----
+OR 
+DMP for Evidence-Based Data Analysis
 * workplan
 - first finalise the doc for phd appendix = version 1.0
 - then work toward generic document for UCRH, CeRAPH, NCEPH etc = version 2.0
@@ -343,7 +345,7 @@
 | </usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/ty     |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | </usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></u                          |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | </usr/share/texmf/fonts/type1/p                                                 |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
-| Output                                                                          | written                                                                    | on                       | swish-dmp-report.pdf     | (19                                 | pages,                                    | 541895                                  | bytes).      |                            |                     |         |   |   |       |   |   |       |
+| Output                                                                          | written                                                                    | on                       | swish-dmp-report.pdf     | (19                                 | pages,                                    | 539540                                  | bytes).      |                            |                     |         |   |   |       |   |   |       |
 | Transcript                                                                      | written                                                                    | on                       | swish-dmp-report.log.    |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | This                                                                            | is                                                                         | BibTeX,                  | Version                  | 0.99c                               | (TeX                                      | Live                                    | 2009/Debian) |                            |                     |         |   |   |       |   |   |       |
 | The                                                                             | top-level                                                                  | auxiliary                | file:                    | swish-dmp-report.aux                |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
@@ -680,7 +682,7 @@
 | </usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/ty     |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | </usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></u                          |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | </usr/share/texmf/fonts/type1/p                                                 |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
-| Output                                                                          | written                                                                    | on                       | swish-dmp-report.pdf     | (19                                 | pages,                                    | 540643                                  | bytes).      |                            |                     |         |   |   |       |   |   |       |
+| Output                                                                          | written                                                                    | on                       | swish-dmp-report.pdf     | (19                                 | pages,                                    | 539540                                  | bytes).      |                            |                     |         |   |   |       |   |   |       |
 | Transcript                                                                      | written                                                                    | on                       | swish-dmp-report.log.    |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | This                                                                            | is                                                                         | pdfTeX,                  | Version                  | 3.1415926-1.40.10                   | (TeX                                      | Live                                    | 2009/Debian) |                            |                     |         |   |   |       |   |   |       |
 | entering                                                                        | extended                                                                   | mode                     |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
@@ -1002,7 +1004,7 @@
 | </usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/ty     |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | </usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></u                          |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 | </usr/share/texmf/fonts/type1/p                                                 |                                                                            |                          |                          |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
-| Output                                                                          | written                                                                    | on                       | swish-dmp-report.pdf     | (19                                 | pages,                                    | 540643                                  | bytes).      |                            |                     |         |   |   |       |   |   |       |
+| Output                                                                          | written                                                                    | on                       | swish-dmp-report.pdf     | (19                                 | pages,                                    | 539540                                  | bytes).      |                            |                     |         |   |   |       |   |   |       |
 | Transcript                                                                      | written                                                                    | on                       | swish-dmp-report.log.    |                                     |                                           |                                         |              |                            |                     |         |   |   |       |   |   |       |
 
 *** COMMENT notes/automating_boilerplate_EML_for_wide_data
@@ -1264,7 +1266,7 @@ Driessen, V. (2010). A successful Git branching model. Nvie.Com. Retrieved Janua
 - change the abstract to reflect this is an ongoing working paper, rather than phd appendix
 - merge develop into master
 - leave the git repo set to the develop branch
-
+- start adding all the elements from the marauders map
 * COMMENT go
 ** tex
 #+name:go
@@ -3199,12 +3201,11 @@ steps include:
 These three topics will be explored in each of the next three sections of this report.
 
 #+end_src
-* data management
+* Data management plan and data inventory
 #+begin_src R :session *R* :tangle swish_data_management_procedures/swish-dmp-report.tex :exports none :eval no
 
 
-\section{Data management plan and data
-inventory}\label{data-management-plan-and-data-inventory}
+\section{Data management plan and data inventory}\label{data-management-plan-and-data-inventory}
 
 In eco-social epidemiology there is a need for a data management plan
 and a data inventory that enables individual scientists, or
@@ -3273,8 +3274,8 @@ The key components of the  data management system as identified above are shown 
 
 
 #+end_src
-** TODO data Storage Large multi site data amnagement
-
+** TODO data Storage Large multi site data management
+*** folders
 #+begin_src R :session *R* :tangle no :exports none :eval no
   \subsection{Upstream and downstream projects}
   
@@ -3300,6 +3301,8 @@ The key components of the  data management system as identified above are shown 
   \clearpage
   
 #+end_src
+*** workflow high level
+
 ** Case study 1: EML and folder structure tex
 #+begin_src R :session *R* :tangle swish_data_management_procedures/swish-dmp-report.tex :exports none :eval no :padline yes
 \subsection{Case study 1: EML and folder structure}
@@ -3343,7 +3346,17 @@ This computer drive is then structured in a simple hierarchy of projects (folder
               child { node {{Entity}} }
           }
       };
-* Planning and implementing
+** COMMENT Procedures for migrating folders from one system to a new system
+*** Planning
+*** Executing
+**** Renaming things after the migration
+1. go to data inventory and modify the project, dataset and entity
+2. go to the origin copy and change the name, change any local copies
+3. go to migration plan/log file and make the note
+4. change in any scripts or map documents
+5. change in any workflow planning documents
+*** Documenting
+* Planning and implementing a pipeline
 #+begin_src R :session *R* :tangle swish_data_management_procedures/swish-dmp-report.tex :exports none :eval no
 
 \section{Planning and implementing a
@@ -3658,7 +3671,6 @@ recommended.
   DiagrammeR::grViz(nodes)
   
 #+end_src
-
 
 * end
 #+begin_src R :session *R* :tangle swish_data_management_procedures/swish-dmp-report.tex :exports none :eval no
