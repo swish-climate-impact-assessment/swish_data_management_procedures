@@ -1,0 +1,483 @@
+#+TITLE: Data management procedures for synthesis and integration of heterogeneous datasets
+#+AUTHOR: Ivan Hanigan
+#+email: ivan.hanigan@anu.edu.au
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [a4paper]
+#+LATEX: \tableofcontents
+-----
+
+* Run the Rmd
+#+begin_src R :session *R* :tangle no :exports none :eval yes :padline yes
+  
+  # func
+  setwd("~/projects/swish-dmp/report_swish_data_management_procedures")
+  library(rmarkdown)
+  library(knitr)
+  library(knitcitations)
+  library(bibtex)
+  cleanbib()
+  # rm("bib")
+  #options("cite_format"="pandoc")
+  cite_options(citation_format = "pandoc", check.entries=FALSE)
+  
+  #rmarkdown::render("swish-dmp-procedures.Rmd", "html_document")  
+  rmarkdown::render("swish-dmp-procedures.Rmd", "pdf_document")
+  # browseURL("swish-dmp-procedures.pdf")
+  # browseURL("swish-dmp-procedures.html")
+#+end_src  
+
+#+RESULTS:
+: /home/ivan_hanigan/projects/swish-dmp/report_swish_data_management_procedures/swish-dmp-procedures.pdf
+
+* COMMENT go-tex
+#+name:go
+#+begin_src R :session *R* :tangle no :exports none :eval yes
+  #### name:go ####
+  setwd("~/projects/swish-dmp/report_swish_data_management_procedures")
+  system("pdflatex swish-dmp-procedures.tex")
+  system("pdflatex swish-dmp-procedures.tex")
+  #browseURL("swish-dmp-procedures.pdf")
+#+end_src
+
+#+RESULTS: go
+: 1
+
+* head
+#+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
+  ---
+  title: "Data management procedures for synthesis and integration of heterogeneous datasets"
+  date: \today
+  author:  
+  - name: Ivan C. Hanigan
+    affilnum: 1
+    email: ivan.hanigan@anu.edu.au  
+  affiliation:
+  - affilnum: 1
+    affil: Centre for Research and Action in Public Health, University of Canberra, Bruce, ACT, 2617, Australia
+  header-includes:
+    - \usepackage{graphicx}
+    - \usepackage{url}   
+  output:
+    pdf_document:
+      fig_caption: yes
+      keep_tex: yes
+      number_sections: yes
+      template: components/manuscript.latex
+      toc: yes
+    html_document: null
+    word_document: null
+  fontsize: 11pt
+  capsize: normalsize
+  csl: meemodified.csl
+  documentclass: article
+  classoption: a4paper
+  spacing: singlespacing
+  linenumbers: no
+  bibliography: references.bib
+  abstract: no
+  ---
+  
+  
+  
+  ```{r echo = F, eval=F, results="hide"}
+  # func
+  setwd("~/projects/swish-dmp/report_swish_data_management_procedures")
+  library(rmarkdown)
+  library(knitr)
+  library(knitcitations)
+  library(bibtex)
+  cleanbib()
+  # rm("bib")
+  #options("cite_format"="pandoc")
+  cite_options(citation_format = "pandoc", check.entries=FALSE)
+  
+  #rmarkdown::render("swish-dmp-procedures.Rmd", "html_document")  
+  rmarkdown::render("swish-dmp-procedures.Rmd", "pdf_document")
+  # browseURL("swish-dmp-report.pdf")
+  # browseURL("swish-dmp-report.html")
+  
+  ```
+  ```{r echo = F, results="hide"}
+  # load
+  if(!exists("bib")){
+  bib <- read.bibtex("~/references/library.bib")
+   
+  for(bibkey in c("SarathiBiswas2012",
+    "Mcmichael2002a", "Gelman2013"
+  )){
+  bib[[bibkey]]$url <- gsub("\\{\\\\_\\}","_", bib[[bibkey]]$url)
+  bib[[bibkey]]$url <- gsub("\\{~\\}","~", bib[[bibkey]]$url)
+  }
+   
+  }
+  ```
+#+end_src
+
+* head2
+#+begin_src R :session *R* :tangle swish-dmp-procedures.tex :exports none :eval no
+
+\documentclass[a4paper]{article}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage{tikz}
+%------------------%
+\makeatletter
+\newcount\dirtree@lvl
+\newcount\dirtree@plvl
+\newcount\dirtree@clvl
+\def\dirtree@growth{%
+  \ifnum\tikznumberofcurrentchild=1\relax
+  \global\advance\dirtree@plvl by 1
+  \expandafter\xdef\csname dirtree@p@\the\dirtree@plvl\endcsname{\the\dirtree@lvl}
+  \fi
+  \global\advance\dirtree@lvl by 1\relax
+  \dirtree@clvl=\dirtree@lvl
+  \advance\dirtree@clvl by -\csname dirtree@p@\the\dirtree@plvl\endcsname
+  \pgf@xa=0.5cm\relax % change the length to your needs
+  \pgf@ya=-0.75cm\relax % change the length to your needs
+  \pgf@ya=\dirtree@clvl\pgf@ya
+  \pgftransformshift{\pgfqpoint{\the\pgf@xa}{\the\pgf@ya}}%
+  \ifnum\tikznumberofcurrentchild=\tikznumberofchildren
+  \global\advance\dirtree@plvl by -1
+  \fi
+}
+\tikzset{ %definition of a new style "dirtree"
+  dirtree/.style={
+    growth function=\dirtree@growth,
+    every node/.style={anchor=north},
+    every child node/.style={anchor=west},
+    edge from parent path={(\tikzparentnode\tikzparentanchor) |- (\tikzchildnode\tikzchildanchor)}
+  }
+}
+\makeatother
+
+
+\begin{document}
+\tikzstyle{every picture}+=[remember picture]
+\tikzset{
+    hyperlink node/.style={
+        alias=sourcenode,
+        append after command={
+            let     \p1 = (sourcenode.north west),
+                \p2=(sourcenode.south east),
+                \n1={\x2-\x1},
+                \n2={\y1-\y2} in
+            node [inner sep=0pt, outer sep=0pt,anchor=north west,at=(\p1)] {\hyperlink{#1}{\phantom{\rule{\n1}{\n2}}}}
+                    %xelatex needs \XeTeXLinkBox, won't create a link unless it
+                    %finds text --- rules don't work without \XeTeXLinkBox.
+                    %Still builds correctly with pdflatex and lualatex
+        }
+    }
+}
+
+
+#+end_src
+
+* Intro
+#+begin_src R :session *R* :tangle swish-dmp-procedures.tex :exports none :eval no
+\begin{singlespace}
+\begin{center}
+\huge Data management procedures for synthesis and integration of
+heterogeneous datasets
+\end{center}
+%%Adds Author, correspond email asterisk, and affilnum from YAML
+\begin{center}
+\large
+Ivan C. Hanigan \textsuperscript{*} \textsuperscript{1} 
+\end{center}
+%%Adds affiliations from YAML
+\begin{justify}
+\footnotesize \emph{ 
+\\*
+\textsuperscript{1}Centre for Research and Action in Public Health, University of Canberra,
+Bruce, ACT, 2617, Australia\\*
+}
+%%Adds corresponding author email(s) from YAML
+\newcounter{num}
+\setcounter{num}{1}
+\\[0.1cm]
+\footnotesize \emph{ 
+\ifnum\value{num}=1%
+\textsuperscript{*} Corresponding author:
+\fi
+\href{mailto:ivan.hanigan@anu.edu.au}{ivan.hanigan@anu.edu.au}
+\stepcounter{num}
+}
+\end{justify}
+%%Adds date from YAML
+\begin{center}
+\small \emph{\today} \\
+\end{center}
+\normalsize
+
+\end{singlespace}
+
+
+\section*{Introduction}
+
+This a description of data management procedures designed for synthesis and integration of heterogeneous datasets.
+It starts with a overview schematic diagram, with hyperlinks to the sections that will provide more details.
+
+#+end_src
+* overview schematic
+#+begin_src R :session *R* :tangle swish-dmp-procedures.tex :exports none :eval no
+\section*{Overview schematic diagram}
+  
+\begin{tikzpicture}[dirtree] % it's what we defined above
+  
+  \node [draw=black!50,dashed,rectangle,fill=green!20]{\hyperref[dmp]{* main computer} }
+      child { node (dmp1) {\hyperref[dmp]{Data Management Plan} }}
+      child { node {\hyperref[datinv]{Data Inventory} }}
+      child { node {\hyperref[install]{** Project1} }
+          child { node {\hyperref[linux]{README}} }
+          child { node {\hyperref[proj]{project management}} }
+          child { node {\hyperref[mac]{*** dataset1}} 
+              child { node {\hyperref[mac2]{**** workplan and protocol}} }            
+              child { node {\hyperref[mac3]{worklog}} }
+              child { node {\hyperref[workflow]{workflow}} }
+              child { node {\hyperref[dataprov]{**** entities1 data provided}} }
+              child { node {\hyperref[datader]{**** entities2 data derived}} 
+                child { node {\hyperref[mac]{files}}} 
+                child { node {\hyperref[mac2]{versions}}}                
+                 }                                      
+              child { node (res1) {\hyperref[mac2]{**** results}} 
+                child { node {YYYY-MM-DD}}
+                 }            
+              child { node {\hyperref[mac3]{reports}} }
+  }
+          child { node {\hyperref[win]{dataset2}} }
+      }
+      child {node {\hyperref[trbl-shoot]{Project2}}
+          child {node {\hyperref[caseX]{dataset3}}}
+          child {node {\hyperref[caseY]{dataset4}}}
+      }
+      child {node {\hyperref[start]{working\_user}}
+          child { node {\hyperref[caseA]{do A}} }
+          child { node {\hyperref[caseB]{do B}} }
+      };
+      % I've put the external resources to the end:
+%      child {node {Versions}
+%          child { node {\href{file:sanitize_bib_table.pdf}{Backups}} }% works only, if "manual.pdf" is in
+                                                         % the same directory as the compiled
+                                                         % version of this document
+  %        child { node {\href{http://www.google.com/}{Version Control}} }
+%      };
+  \end{tikzpicture}
+  \hspace{0.1cm}
+\begin{tikzpicture}[
+              outpt/.style={->,blue!80!black,very thick},
+              >=stealth,
+           every node/.append style={align=center}]
+                \node (aux) at (0,18) [draw=black!50,dashed,rectangle,fill=green!30,hyperlink node=pagetwo]{Auxiliary resources}; 
+                \node (aux1) at (0,17) [draw=black!50,dashed,rectangle,fill=yellow!30,hyperlink node=pagetwo]{Dropbox}; 
+  
+                \node (measdata) at (-2.4,9) [draw=black!50,dashed,rectangle,fill=orange!30,hyperlink node=proj]{Distributed data}; 
+                \node (hypothesis) at (2,9) [draw=black!50,dashed,rectangle,fill=red!30,hyperlink node=pagethree]{Permissions \\ + citations}; 
+              \node (anadata) at (0,7.5) [draw=black!50,dashed,rectangle,fill=orange!30] {\begin{tabular}{@{}c}feedback \end{tabular}};
+              \node (anadata3) at (0,0) [draw=black!50,dashed,rectangle,fill=orange!30] {\begin{tabular}{@{}c}Version control\end{tabular}};
+
+              \draw[outpt](anadata)--(measdata);
+              \draw[outpt](measdata)--(hypothesis);
+              \draw[outpt](hypothesis)--(anadata);
+
+  
+\end{tikzpicture}
+%}
+\begin{tikzpicture}[overlay]
+        \draw (aux1) -- (dmp1);
+        \draw (anadata) .. controls (10,7) .. (res1);
+
+\end{tikzpicture}
+\clearpage
+\tikz \node [draw, inner sep=2ex,hyperlink node=pageone] {Main Computer};
+
+\hypertarget{pagetwo}{Page Two}
+\clearpage
+\hypertarget{pagethree}{Page Three}
+
+\clearpage
+\section*{Installation}\label{install}
+
+\subsection*{Data Management Plan}\label{dmp}
+
+\subsection*{Linux}\label{linux}
+Some content.
+
+\subsection*{Mac}\label{mac}
+Some content.
+
+\subsection*{Windows}\label{win}
+Some content.
+\clearpage
+\section*{Get started}\label{start}
+\subsection*{First: Do A}\label{caseA}
+Some content.
+
+\subsection*{Second: Do B}\label{caseB}
+ Some content.
+\clearpage
+\section*{Trouble shooting}\label{trbl-shoot}
+\subsection*{If X happens:}\label{caseX}
+Some content.
+
+\subsection*{If Y happens:}\label{caseY}
+ Some content.
+
+\subsection*{Data Inventory}\label{datinv}
+\subsection*{Worklog2}\label{mac2}
+\subsection*{Worklog}\label{mac3}
+
+Conventions used for writing these entries are:
+\begin{quote}
+- Names follow this structure [**] [date in ISO 8601] [meeting/notes/results] [from UserName] [Re: topic shortname]
+- 'meetings' are for both agenda preparation and also notes of discussion
+- 'notes' are such things as emailed information or ad hoc Discovery
+- 'results' are entries related to a section of the 'results' folder. 
+  That is, this kind of entry is in parallel to the results entry,
+  however the log contains a prose description of the experiment,
+  whereas the results folder contains scripts etc of all the gory
+  details.  
+\end{quote}
+\subsection*{Workflow}\label{workflow}
+
+
+%\clearpage
+\subsection*{Project Management}\label{proj}
+\hypertarget{proj}{Project Management stuff}
+\begin{tikzpicture}[dirtree] % it's what we defined above
+  
+\node [draw=black!50,dashed,rectangle,fill=green!20]{{project plan} }
+      child { node {{proposal} }
+          child { node {{approved version: this is the master plan}} }
+      }
+      child { node {{meetings} }
+          child { node {{meeting1}} }
+      };
+
+\end{tikzpicture}
+  
+  
+#+end_src
+* overarching data management system
+** DEPRECATED SEE PUBLIC GIT Rmd DMP and datinv
+#+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
+  \clearpage
+  # Overarching data management system  
+  
+  ## Data management plan and data inventory
+  
+  In eco-social epidemiology there is a need for a data management
+  plan and a data inventory that enables individual scientists, or
+  multidisciplinary teams of scientists, to manage large and
+  heterogeneous collections of disparate data sources efficiently.
+  Keeping track of all the elements of a linked health, social and
+  environmental database is very challenging, despite major improvements
+  in data management software, web-portals and virtual laboratories
+  `r citep(bib[["Fleming2014" ]])`.
+  
+  Effective data management policies and procedures are essential in
+  managing data-related risk. Such risks include data loss or
+  corruption, technological obsolescence, breaches of privacy or
+  copyright, and errors or misuse.  Misuse may be due either to
+  unintended user misunderstandings about data attributes (no dataset is
+  perfect and self-explanatory, see `r citet(bib[["Michener1997" ]])`)
+  or intentional mis-use for malicious or selfish reasons (for example
+  the misuse of data by Bjorn Lomborg to support the argument that
+  environmental health conditions are actually improving.  See
+  `r citet(bib[["Bodnar2004" ]])` for a discussion on Lomborg\'s misuse
+  of data.  There have also been notable examples of mistakes in data
+  analyses used for climate change science.  See
+  `r citet(bib[["Cai2010" ]])` for a discussion of one such case.  The
+  careful storage and curation of datasets is also critical because data from many
+  studies are lost
+  `r citep(c(bib[["Pullin2010" ]], bib[["Vines2014a" ]]))`.
+  
+  Data management plans are needed for developing procedures and
+  processes to keep data safe.  There is an issue when ensuring that all
+  relevant data are collected in deciding what is relevant.  Keeping an
+  up-to-date data inventory and careful organisation of all folders and
+  files helps mitigate these problems.
+  
+  Whether data management is the responsibility of the individuals
+  collecting or collating it, or of the lead scientist, clarity on how
+  and where data are stored and who manages it is vital, as is a
+  'succession plan' that sets out the vision of the data collections
+  preservation and re-use into the future.
+
+#+end_src
+** DEPRECATED Rmd Case study 1: EML and folder structure
+#+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
+
+  
+  ## Case study 1: Ecological Metadata  Language (EML) and folder structure
+  
+  For data to be reused in the future, metadata and documentation need to be carefully
+  prepared to allow future users (including the original collector) to find and understand the
+  data (Michener et al. 1997). Metadata should be associated with the data
+  and adhere to a standard schema. This example shows the use of the Ecological Metadata Language (EML). 
+  
+  Good metadata requires sufficient detail
+  to describe the collection process and to record decisions that were made during the
+  design phase about the use of different sampling methods. Time and effort may be saved
+  by considering metadata requirements at the commencement of a study, rather than trying
+  to recall all the details later. If metadata adheres to a standard schema, it can be used in
+  catalogues to enable fast searching and retrieval, or in machine-to-machine data queries
+  that assist data access and use.
+    
+  In EML the elements of any dataset can be seen as a nested hierarchy at three levels:
+   
+  1. The Project level: this is an overarching grouping of data.  It might be indicative of the principal investigator or organisation who provided the data, or a programme of research studies.
+  2. The Dataset level: this is a distinct grouping of data that might be organised around a particular time period or geographical region.
+  3. The Entity level: This grouping of data includes data files (such as tables in CSV or Excel, shapefiles and raster images) or documents (such as metadata descriptions or related publications). 
+  
+  This conceptual framework can be very useful for the organisation of the work constituting a single pipeline, as well as when working with multiple pipelines within several projects.
+    
+  ![images/EML_project.png](images/EML_project.png)
+#+end_src
+
+** Rmd EML based data inventory
+  
+#+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
+  
+  
+  ## An EML based data inventory
+  
+  
+#+end_src
+
+
+* folders
+** project
+*** dataset
+**** entity
+#+begin_src R :session *R* :tangle swish-dmp-procedures.tex :exports none :eval no
+\subsection*{Data Provided}\label{dataprov}
+
+\begin{itemize}
+\item Keep this as provided, set to read only
+\item keep emails and any other info here
+\end{itemize}
+
+#+end_src
+* Conclusions and Refs
+#+begin_src R :session *R* :tangle swish-dmp-procedures.Rmd :exports none :eval no
+  # Discussion and Conclusion
+
+  - TODO 
+
+  \clearpage
+
+  # References
+  
+  ```{r, echo=FALSE, message=FALSE, eval = T}
+  write.bibtex(file="references.bib")
+  ```
+  
+  
+#+end_src
+* end2
+#+begin_src R :session *R* :tangle swish-dmp-procedures.tex :exports none :eval no
+\end{document}
+#+end_src
