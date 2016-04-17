@@ -2681,7 +2681,7 @@ multiple pipelines within several projects.
   \node (p4) at (6, -3.7) {Dataset 5};
   \node (local2) at (6,-4.4) [draw=black!50,ellipse]{Data provided};
   \node (local) at (6,-6) [draw=black!50,ellipse]{Data derived};
-  \node (validated) at (6,-8) [draw=black!50,ellipse] {results};  
+  \node (validated) at (6,-8) [draw=black!50,ellipse] {Results};  
   \draw [-latex,color=blue] (GH) -- (local);
   \draw [-latex,color=blue] (local) -- (validated);
   \draw [-latex,color=blue] (local2) -- (local);
@@ -2852,7 +2852,7 @@ multiple pipelines within several projects.
 \node (p4) at (6, -3.7) {Dataset 5};
 \node (local2) at (6,-4.4) [draw=black!50,ellipse]{Data provided};
 \node (local) at (6,-6) [draw=black!50,ellipse]{Data derived};
-\node (validated) at (6,-8) [draw=black!50,ellipse] {results};  
+\node (validated) at (6,-8) [draw=black!50,ellipse] {Results};  
 \draw [-latex,color=blue] (GH) -- (local);
 \draw [-latex,color=blue] (local) -- (validated);
 \draw [-latex,color=blue] (local2) -- (local);
@@ -3023,7 +3023,7 @@ multiple pipelines within several projects.
 \node (p4) at (6, -3.7) {Dataset 5};
 \node (local2) at (6,-4.4) [draw=black!50,ellipse]{Data provided};
 \node (local) at (6,-6) [draw=black!50,ellipse]{Data derived};
-\node (validated) at (6,-8) [draw=black!50,ellipse] {results};  
+\node (validated) at (6,-8) [draw=black!50,ellipse] {Results};  
 \draw [-latex,color=blue] (GH) -- (local);
 %\draw [-latex,color=blue] (local) -- (validated);
 \draw [-latex,color=blue] (local2) -- (local);
@@ -3095,7 +3095,7 @@ multiple pipelines within several projects.
 
 \draw [-latex,color=blue] (local21) -- (local2);
 \draw [-latex,color=blue] (local) -- (local31);
-\draw [-latex,color=blue] (local21) -- (root);
+%\draw [-latex,color=blue] (local21) -- (root);
 
 \begin{pgfonlayer}{background}
    % Left-top corner of the background rectangle
