@@ -1,0 +1,52 @@
+---
+title: "Reproducible report example"
+author: "Ivan C. Hanigan"
+output:  pdf_document
+---
+
+# Some exploratory analysis
+In this section we do some exploratory analysis of the NMMAPS data for
+deaths in Chicago 1987-2000. The code, messages and intermediary
+results are hidden in the resulting report document.
+
+```{r, echo = FALSE, message = FALSE}
+## We begin by reading in the data file:
+## If using our own data we would use 'read.csv' or a similar tool to import data to R
+# my.data <- read.csv('data/sampledata.csv',header=TRUE)
+## for this example use data that are included in the dlnm package
+library(dlnm)
+# look at the structure of the data
+# str(chicagoNMMAPS)
+# summary(chicagoNMMAPS)
+```
+
+We made a simple scatter plot shown below
+
+```{r, echo = FALSE, message = FALSE}
+## make some plots. first by day
+# with(chicagoNMMAPS, plot(date, cvd, type = "l"))
+# we suspect a relationship between temperature and deaths
+with(chicagoNMMAPS, plot(temp, cvd, pch = 16, cex = .6))
+title(main = "A scatter plot of daily temperatures against deaths")
+```
+
+We ran some exploratory models. A Poisson GAM with smooth functions
+on temperature and time was compared to a linear fit on temperature.
+
+```{r, echo = FALSE, message = FALSE}
+library(mgcv)
+fit1 <- gam(cvd ~ s(temp) + s(time), data=chicagoNMMAPS, family = "poisson")
+# we can access post-estimation summary statistics
+# summary(fit1)
+# or just plot the exposure-response function
+plot(fit1, select = 1)
+title(main = "The exposure-response function estimated using MGCV")
+aic1 <- AIC(fit1)
+# compare this to a linear term for temperature
+aic0 <- AIC(gam(cvd ~ temp + s(time), data=chicagoNMMAPS, family = "poisson"))
+# calculate the delta aic
+aici <- aic1 - aic0
+```
+
+The result can be automatically inserted to the text. This model has
+a delta AIC of `r round(aici,1)` (smoothed minus linear term).
