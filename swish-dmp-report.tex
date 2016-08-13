@@ -301,15 +301,14 @@ both content as well as the output of any embedded computer code
 ---
 title: "Reproducible report example"
 author: "Ivan C. Hanigan"
-output: pdf_document
+output:  pdf_document
 ---
-
 # Some exploratory analysis
 In this section we do some exploratory analysis of the NMMAPS data for
-deaths in Chicago 1987-2000.  The code, messages and intermediary
+deaths in Chicago 1987-2000. The code, messages and intermediary
 results are hidden in the resulting report document.
 ```{r, echo = FALSE, message = FALSE}
-## We begin  by reading in the data file:
+## We begin by reading in the data file:
 ## If using our own data we would use 'read.csv' or a similar tool to import data to R
 # my.data <- read.csv('data/sampledata.csv',header=TRUE)
 ## for this example use data that are included in the dlnm package
@@ -326,13 +325,15 @@ We made a simple scatter plot shown below
 with(chicagoNMMAPS, plot(temp, cvd, pch = 16, cex = .6))
 title(main = "A scatter plot of daily temperatures against deaths")
 ```
-We ran some exploratory models.  A Poisson GAM with smooth functions
+We ran some exploratory models. A Poisson GAM with smooth functions
 on temperature and time was compared to a linear fit on temperature.
 ```{r, echo = FALSE, message = FALSE}
 library(mgcv)
-fit1 <- gam(cvd ~ s(temp) + s(time), data=chicagoNMMAPS, family = "poisson") 
+fit1 <- gam(cvd ~ s(temp) + s(time), data=chicagoNMMAPS, family = "poisson")
 # we can access post-estimation summary statistics
-# summary(fit1)
+summary(fit1)
+# do model testing to confirm that the error terms are distributed as assumed
+gam.check(fit1)
 # or just plot the exposure-response function
 plot(fit1, select = 1)
 title(main = "The exposure-response function estimated using MGCV")
@@ -340,9 +341,9 @@ aic1 <- AIC(fit1)
 # compare this to a linear term for temperature
 aic0 <- AIC(gam(cvd ~ temp + s(time), data=chicagoNMMAPS, family = "poisson"))
 # calculate the delta aic
-aici <- aic1 - aic0 
+aici <- aic1 - aic0
 ```
-The result can be automatically inserted to the text.  This model has
+The result can be automatically inserted to the text. This model has
 a delta AIC of `r round(aici,1)` (smoothed minus linear term).
 \end{verbatim}
 \end{Shaded}
@@ -704,7 +705,7 @@ The key components of the  data management system as identified above are shown 
 
 \begin{figure}[!h]
 \centering
-\includegraphics[width=\textwidth]{images/file_name.png}
+\includegraphics[width=.8\textwidth]{images/file_name.png}
 \caption{A schematic diagram of the management of large multi-institute collaborative project}
 \label{fig:file_name}
 \end{figure}
@@ -731,6 +732,8 @@ This computer drive is then structured in a simple hierarchy of projects (folder
 \end{tikzpicture}
 \caption{Conceptual framework for grouping data files (entities) within datasets and projects} \label{fig:M2}
 \end{figure}
+
+\newpage
 
 \section{Planning and implementing a
 pipeline}\label{planning-and-implementing-a-pipeline}
