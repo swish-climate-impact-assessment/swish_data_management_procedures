@@ -37,7 +37,9 @@ on temperature and time was compared to a linear fit on temperature.
 library(mgcv)
 fit1 <- gam(cvd ~ s(temp) + s(time), data=chicagoNMMAPS, family = "poisson")
 # we can access post-estimation summary statistics
-# summary(fit1)
+summary(fit1)
+# do model testing to confirm that the error terms are distributed as assumed
+gam.check(fit1)
 # or just plot the exposure-response function
 plot(fit1, select = 1)
 title(main = "The exposure-response function estimated using MGCV")
