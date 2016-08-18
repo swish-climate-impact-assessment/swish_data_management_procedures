@@ -200,7 +200,7 @@ Ivan C. Hanigan
 \normalsize
 
 \begin{abstract}
-This unpublished working paper was written to accompany the material included in the PhD thesis `Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors' by Ivan Hanigan (2016). It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of
+This unpublished working paper was written to accompany the material included in the PhD thesis `Using Reproducible Research Pipelines to Help Disentangle Health Effects of Environmental Changes from Social Factors'. It sets out the key data management and analysis principles that were found to be most effective for the reproducibile synthesis and integration of
 heterogeneous datasets for analysis and reporting. The draft was last updated \today. The version submitted with the thesis is available on the phd\_appendix branch of the Github repository: \url{https://github.com/swish-climate-impact-assessment/swish_data_management_procedures}.
 \end{abstract}
 \end{singlespace}
@@ -231,10 +231,9 @@ the environmental and social determinants of health must be rigorously and trans
 procedures that have been found to effectively assist the development of
 reproducible research pipelines in this context.
 
-\subsection{The 'reproducibility crisis'}
+\subsection{The `reproducibility crisis'}
 
-It is possible to have analyses that
-are reproducible with varying degrees of difficulty. A data analysis
+All data analyses are reproducible to a varying degree of difficulty. A data analysis
 might be reproducible but require thousands of hours of work. A primary
 challenge for reproducible data analysis is to make analyses that are
 \emph{easy} to reproduce.
@@ -257,11 +256,11 @@ honestly from the same set of data.
 
 \subsection{A common (flawed) approach for generating statistical reports}
 
-A common approach with inherent flaws that make it error-prone was identified by \citet{Scott}, and the examples are paraphrased here.  
-First, the data entry, cleaning, preparation and possibly statistical analyses are conducted by 'point-and-click' procedures using software such as Microsoft (MS) Excel.
-This introduces well-known issues with handling of missing data, poor algorithms and unreliable results \citep{McCullough2008}.
+A common approach (with inherent flaws that make it error-prone) was identified by \citet{Scott}, and the examples are paraphrased here.  
+First: the data entry, cleaning, preparation and possibly statistical analyses are conducted by `point-and-click' procedures using spreadsheet software such as Microsoft (MS) Excel.
+This introduces well-known issues with handling of dates, coloured cells, hidden columns, missing data, poor algorithms and unreliable results \citep{McCullough2008}.
 In cases where data are imported to a program such as STATA or SPSS, further point-and-click data preparation and statistical analyses often occur.
-Spreadsheet software such as MS Excel is regularly used to record or format the desired results, and generate figures.
+Post-analysis, spreadsheets such as MS Excel are regularly used to record or format the desired results, and generate figures.
 Finally, the results (text, tables and figures) from the data analysis system are inserted into a word processor (eg, MS Word) using 'copy-and-paste' procedures (or typed by hand). 
 \clearpage
 Problems with this common, flawed approach according to \citet{Scott} are:
@@ -270,7 +269,7 @@ Problems with this common, flawed approach according to \citet{Scott} are:
 \item When you go to your project folder to run the additional analysis, you find multiple data files, multiple analysis files,
 and multiple results files. You can’t remember which ones are pertinent.
 \item You\'ve just spent the week running your analysis and creating a results report (including tables and figures) to present to your collaborators. You then receive an email from your PI asking you to regenerate the report based on a subset of the original data set and including an additional set of analyses – she would like it by tomorrow\'s meeting.
-\item With point and click programs (eg, MS Excel or not using SPSS’s log), no way to record/save the steps performed that generated the documented results.
+\item With point and click programs there is no way to record the steps performed that generated the documented results.
 \item Common to keep analysis code, results, and reports as separate files and to save various versions of each of these as separate files.
 After several modifications of one or more of the files involved, becomes unclear which version of the files exactly correspond to the desired analysis and results.
 \item Every time analyses and/or results change, have to regenerate the results report by hand – very time consuming.
@@ -349,12 +348,7 @@ a delta AIC of `r round(aici,1)` (smoothed minus linear term).
 \end{Shaded}
 \end{singlespace}
 
-In this example the Rmarkdown engine is used to construct the final report by 'weaving' or 'knitting' together the prose and the code.  The prose is written in 'markdown' which is a simple way to use 'markup' commands to tell the program to do formatting on the inputs.  For example the first 'hash' symbol tells the program that this line should be written in the style of heading-1.  The three 'backtick' marks tell the program that the following text should be interpreted as R code.  Inside these 'chunks' the 'hash' symbol is interpreted as a comment and the line is not executed.
-
-
-The resulting report can be viewed at this website: \href{https://github.com/ivanhanigan/ReproducibleResearchPipelineTemplate-results/tree/master/2016-01-30-RRRexample}{https://github.com/ivanhanigan/} \\
-\href{https://github.com/ivanhanigan/ReproducibleResearchPipelineTemplate-results/tree/master/2016-01-30-RRRexample}{ReproducibleResearchPipelineTemplate-results/tree/master/2016-01-30-RRRexample}.
-
+The result can be seen at this link (\url{https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/Reproducible_report_example.pdf}). In this example the Rmarkdown engine is used to construct the final report by `weaving' together the prose and the code.  The prose is written in `markdown' which is a simple way to use `markup' commands to tell the program to do formatting on the inputs.  For example the first `hash' (\#) symbol tells the program that this line should be written in the style of heading-1.  The three `backtick' marks (`) tell the program that the following text should be interpreted as R code.  Inside these `chunks' the `hash' symbol is interpreted as a comment and the line is not executed.
 
 If an analysis is published as a reproducible report, readers can have greater confidence 
 in the work that was done, and verify this for themselves if questions remain. However, it has also been recognised that reproducible research can still be wrong and a
@@ -388,8 +382,7 @@ contain, data analysis will be more robust. According to \citet{Peng},
 there should not be a `lonely data analyst' coming up with their own
 method. If a researcher conducted an analysis using an evidence-based
 reproducible research pipeline `you could at least have a sense that
-something reasonable was done' \citet{Peng} and be confident that you could easily
-check what had been done if you needed to.
+something reasonable was done' \citep{Peng}.
 
 \subsection{The core components of a pipeline}\label{the-core-components-of-a-pipeline}
 
@@ -552,13 +545,13 @@ enable others to repeat the analyses and to conduct other similar ones.
 This can take the form of metadata, reports, journal 
 papers or even books \citep{Peng2008a}. Indeed textbooks on statistical methods can benefit greatly from being accompanied by data and analytical code to enhance their pedagogic functions  \citep{Barnett2015,Barnett2010}.
 
-Misuse may be due either to unintended user misunderstandings
+Inadequate documentation can lead to data misuse.  This may be due either to honest misunderstandings
 about data attributes (no dataset is perfect and self-explanatory, see
-\citet{Michener1997}) or intentional mis-use for malicious or selfish
+\citet{Michener1997}) or intentional misuse for malicious or selfish
 reasons (for example the misuse of data by Bjorn Lomborg to support the
 argument that environmental health conditions are actually improving.
 See \citet{Bodnar2004} for a discussion on Lomborg\'s misuse
-of data.  There have also been notable examples of mistakes in data
+of data).  There have also been notable examples of mistakes in data
 analyses used for climate change science.  See
 \citet{Cai2010} for a discussion of one such case.  The
 careful storage and curation of datasets is also critical because data from many
@@ -600,7 +593,7 @@ these together.
 For data to be reused in the future, files and related documents need to
 be carefully managed to allow future users (including the original
 collector) to find and understand them. A formalised  approach to 
-data management should be developed, and following a widely agreed 'standard'
+data management should be developed, and following a widely agreed `standard'
  if possible. This example shows the use of the Ecological Metadata Language
 (EML) concepts of Projects, Datasets and Entities.
 EML was developed primarily for creating metadata and allows sufficient detail to describe the collection process and record decisions that were made during the creation of the data. 
@@ -633,7 +626,7 @@ multiple pipelines within several projects.
 \caption{The EML approach to managing Projects, Datasets and Entities}
 \label{fig:emlproj}
 \end{figure}
-
+\clearpage
 \subsection{Procedures when conducting a reproducible research
 analysis}\label{procedures-when-conducting-a-reproducible-research-analysis}
 
@@ -701,7 +694,7 @@ presentation in this thesis, a range of available workflow tools for
 data management and analysis were investigated and developed.
 
 The key components of the  data management system as identified above are shown graphically in figure 
-\ref{fig:file_name}.  A project can contain many datasets (folders), which in turn may hold many entities (files). This organisation model for a project can be described in terms of 'general' projects (about general contextual data, accessible to the entire group) or 'specific' projects (about a specific Health/Exposure study and will have a specific subset of authorised people who can access it).  General data can go into the main storage folder however specific data needs to more secure storage.
+\ref{fig:file_name}.  A project can contain many datasets (folders), which in turn may hold many entities (files). This organisation model for a project can be described in terms of `general' projects (about general contextual data, accessible to the entire group) or `specific' projects (about a specific Health/Exposure study and will have a specific subset of authorised people who can access it).  General data can go into the main storage folder however specific data needs to have more secure storage.
 
 \begin{figure}[!h]
 \centering
@@ -709,10 +702,10 @@ The key components of the  data management system as identified above are shown 
 \caption{A schematic diagram of the management of large multi-institute collaborative project}
 \label{fig:file_name}
 \end{figure}
-
+\clearpage
 \subsection{Case study 1: EML and folder structure}
 
-In figure \ref{fig:M2} the conceptual framework described above is implemented in a standardised folder structure.  The main storage location for this data collection is called 'Research data'.  
+In figure \ref{fig:M2} the conceptual framework described above is implemented in a standardised folder structure.  The main storage location for this data collection is called `Research data'.  
 This computer drive is then structured in a simple hierarchy of projects (folders), datasets (sub-folders) and entities (sub-sub-folders or individual files).  Entities may be individual files, or groups of files in a sub-sub-folder to cater for data structures such as those where there are a collections of files that make up a single entity such as the Shapefile or Raster Image dataset as used in Geographical Information Systems (GIS) software.  As seen in figure \ref{fig:file_name} it might make sense to group all entities into folders that delineate those files provided as raw data and those that were derived by some process within the project.
 
 \begin{figure}[!h]
@@ -733,7 +726,7 @@ This computer drive is then structured in a simple hierarchy of projects (folder
 \caption{Conceptual framework for grouping data files (entities) within datasets and projects} \label{fig:M2}
 \end{figure}
 
-\newpage
+%\newpage
 
 \section{Planning and implementing a
 pipeline}\label{planning-and-implementing-a-pipeline}
@@ -758,7 +751,7 @@ forum called `stack overflow'
 (\url{http://cran.r-project.org/web/packages/makeProject/makeProject.pdf}).
 The approach is demonstrated in case study 2 below.
 
-
+\clearpage
 
 \subsection{Case study 2: Simple pipeline using the makeProject
 package}\label{case-study-2-simple-pipeline-using-the-makeproject-package}
@@ -806,7 +799,7 @@ community as `Tidy Data' guidelines. In the words of \citet{WickhamRstudio2014} 
 order that data should be arranged in follows some generic principles:
 
 \begin{quote}
-'A good ordering makes it easier to scan the raw values. One way of
+`A good ordering makes it easier to scan the raw values. One way of
 organizing variables is by their role in the analysis: are values
 fixed by the design of the data collection, or are they measured
 during the course of the experiment? Fixed variables describe the
@@ -863,7 +856,7 @@ contiguous, and vary sequentially within clusters.
 
 An example is shown in Table \ref{tab:TableFiles} to describe this and
 make it easier to understand. Here is a set of file names that were
-constructed for an ecological field sites project that the I worked on
+constructed for an ecological field sites project that I worked on
 (\href{http://www.supersites.net.au/}{\url{http://www.supersites.net.au/}}).
 That project involved ecological data sampled at plot-based measurement
 locations. At the begining of the procedure a controlled vocabulary of
@@ -889,16 +882,11 @@ asn\_fnqr\_soil\_charact\_robson\_2011.csv & Soil Data, Far North Queensland Rai
   asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu11a\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU11A, 2014 \\ 
   asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu7a\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU7A, 2014 \\ 
   asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu7b\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU7B, 2014 \\ 
-  asn\_fnqr\_fauna\_biodiversity\_ctbcc\_lu9a\_2014.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU9A, 2014 \\ 
-  asn\_fnqr\_fauna\_biodiversity\_ctbcc-lu11a\_2009-2011.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU11A, 2009-2011 \\ 
-  asn\_fnqr\_fauna\_biodiversity\_ctbcc-lu7a\_2009-2011.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU7A, 2009-2011 \\ 
-  asn\_fnqr\_fauna\_biodiversity\_ctbcc-lu9a\_2009-2011.csv & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU9A, 2009-2011 \\ 
-  asn\_fnqr\_fauna\_biodiversity\_habitat\_codes\_ctbcc-lu11a\_2009-2011.pdf & Vertebrate Fauna Biodiversity Monitoring, Far North Queensland Rainforest SuperSite, CTBCC, LU11A, 2009-2011 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-%\clearpage
+\clearpage
 
 \section{Tracking method steps: Visualisation techniques}\label{visualisation-techniques}
 
