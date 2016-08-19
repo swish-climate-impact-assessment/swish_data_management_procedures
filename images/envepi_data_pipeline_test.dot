@@ -1,0 +1,134 @@
+digraph transformations {
+
+ subgraph cluster_01_ProjectScope {
+    label = "01_ProjectScope"
+     "project_approvals" -> "spatial_framework"
+"define_region_and_time" -> "spatial_framework"
+"spatial_framework"  [ shape=record, label="{{ { Name | Description } | { spatial_framework | Health outcomes, main exposures and contextual information } }}"]
+"spatial_framework" -> "spatial_data_outcomes"
+"spatial_framework" -> "spatial_data_exposures"
+"spatial_framework" -> "spatial_data_context"
+
+ 
+ "hypothesis" -> "study_design"
+"study_design"  [ shape=record, label="{{ { Name | Description } | { study_design | Scale of aggregation changes signal and noise } }}"]
+"study_design" -> "project_approvals"
+
+ 
+ }
+
+ subgraph cluster_02_DataPrep_HealthOutcomes {
+    label = "02_DataPrep_HealthOutcomes"
+     "groupings_disease" -> "groupings"
+"spatial_data_outcomes" -> "groupings"
+"groupings_age_and_sex" -> "groupings"
+"groupings"  [ shape=record, label="{{ { Name | Description } | { groupings | data grouped by disease type, age, sex, etc } }}"]
+"groupings" -> "outcome_prepared"
+
+ 
+ "outcome_source" -> "outcome deduplication "
+"outcome deduplication "  [ shape=record, label="{{ { Name | Description } | { outcome deduplication  | need to be checked for duplicate records  } }}"]
+"outcome deduplication " -> "outcome_prepared"
+
+ 
+ "outcome_prepared" -> "exploration outcomes"
+"exploration outcomes"  [ shape=record, label="{{ { Name | Description } | { exploration outcomes | The health outcome data, explored and cleaned context_clean exposure_clean  } }}"]
+"exploration outcomes" -> "outcome_clean"
+
+ 
+ "groupings_concordance" -> "groupings disease"
+"groupings disease"  [ shape=record, label="{{ { Name | Description } | { groupings disease | Grouping categories of disease type can change over time } }}"]
+"groupings disease" -> "groupings_disease"
+
+ 
+ }
+
+ subgraph cluster_03_DataPrep_Exposures {
+    label = "03_DataPrep_Exposures"
+     "exposure1" -> "exposure"
+"exposure2" -> "exposure"
+"exposure3" -> "exposure"
+"spatial_data_exposures" -> "exposure"
+"exposure"  [ shape=record, label="{{ { Name | Description } | { exposure | the main environmental variable of interest plus confounders } }}"]
+"exposure" -> "exposure_clean"
+
+ 
+ "social_context" -> "context"
+"economic_context" -> "context"
+"population_context" -> "context"
+"spatial_data_context" -> "context"
+"context"  [ shape=record, label="{{ { Name | Description } | { context | these provide context regarding the humans } }}"]
+"context" -> "context_clean"
+
+ 
+ "groupings_age_and_sex" -> "population context"
+"population context"  [ shape=record, label="{{ { Name | Description } | { population context | The human population in different age groups, by area and time (need imputa [...] } }}"]
+"population context" -> "population_context"
+
+ 
+ }
+
+ subgraph cluster_04_ExploratoryAnalysis {
+    label = "04_ExploratoryAnalysis"
+     "outcome_clean" -> "data_summaries"
+"exposure_clean" -> "data_summaries"
+"context_clean" -> "data_summaries"
+"data_summaries"  [ shape=record, label="{{ { Name | Description } | { data_summaries | explore each variable } }}"]
+"data_summaries" -> "univariate_summaries"
+"data_summaries" -> "multivariate_summaries"
+"data_summaries" -> "maps"
+
+ 
+ "univariate_summaries" -> "report"
+"multivariate_summaries" -> "report"
+"maps" -> "report"
+"report"  [ shape=record, label="{{ { Name | Description } | { report | this report guides the set up phase of modelling } }}"]
+"report" -> "report_eda"
+
+ 
+ }
+
+ subgraph cluster_05_Modelling {
+    label = "05_Modelling"
+     "report_eda" -> "models_1_to_n"
+"models_1_to_n"  [ shape=record, label="{{ { Name | Description } | { models_1_to_n | Move from a  core model to a richer model to a simpler model } }}"]
+"models_1_to_n" -> "model1_result"
+"models_1_to_n" -> "model_n_results"
+
+ 
+ "model1_result" -> "model_selection"
+"model_n_results" -> "model_selection"
+"model_selection"  [ shape=record, label="{{ { Name | Description } | { model_selection | use AIC or BIC to assess modelling } }}"]
+"model_selection" -> "minimal_model"
+
+ 
+ "minimal_model" -> "sensitivity"
+"sensitivity"  [ shape=record, label="{{ { Name | Description } | { sensitivity |  } }}"]
+"sensitivity" -> "report_modelling"
+
+ 
+ }
+
+ subgraph cluster_06_Publishing {
+    label = "06_Publishing"
+     "report_modelling" -> "publication"
+"publication"  [ shape=record, label="{{ { Name | Description } | { publication | the manuscript prepared, submitted, reviewed, revised } }}"]
+"publication" -> "manuscript"
+"publication" -> "replication_data"
+
+ 
+ "manuscript" -> "respond_to_review"
+"respond_to_review"  [ shape=record, label="{{ { Name | Description } | { respond_to_review |  } }}"]
+"respond_to_review" -> "new_models"
+"respond_to_review" -> "response_to_review"
+
+ 
+ "response_to_review" -> "archive"
+"replication_data" -> "archive"
+"archive"  [ shape=record, label="{{ { Name | Description } | { archive | with metadata to allow review, reproduction or re-use } }}"]
+"archive" -> "archived"
+
+ 
+ }
+
+ }
