@@ -350,6 +350,8 @@ on temperature and time was compared to a linear fit on temperature.
 \NormalTok{fit1 <-}\StringTok{ }\KeywordTok{gam}\NormalTok{(cvd ~}\StringTok{ }\KeywordTok{s}\NormalTok{(temp) +}\StringTok{ }\KeywordTok{s}\NormalTok{(time), }\DataTypeTok{data=}\NormalTok{chicagoNMMAPS, }\DataTypeTok{family =} \StringTok{"poisson"}\NormalTok{) }
 \CommentTok{# we can access post-estimation summary statistics}
 \CommentTok{# summary(fit1)}
+\CommentTok{# do model testing to confirm that the error terms are distributed as assumed}
+\CommentTok{# gam.check(fit1)}
 \CommentTok{# or just plot the exposure-response function}
 \KeywordTok{plot}\NormalTok{(fit1, }\DataTypeTok{select =} \DecValTok{1}\NormalTok{)}
 \KeywordTok{title}\NormalTok{(}\DataTypeTok{main =} \StringTok{"The exposure-response function estimated using MGCV"}\NormalTok{)}
