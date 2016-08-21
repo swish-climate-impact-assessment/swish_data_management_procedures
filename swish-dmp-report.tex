@@ -261,29 +261,29 @@ First: the data entry, cleaning, preparation and possibly statistical analyses a
 This introduces well-known issues with handling of dates, coloured cells, hidden columns, missing data, poor algorithms and unreliable results \citep{McCullough2008}.
 In cases where data are imported to a program such as STATA or SPSS, further point-and-click data preparation and statistical analyses often occur.
 Post-analysis, spreadsheets such as MS Excel are regularly used to record or format the desired results, and generate figures.
-Finally, the results (text, tables and figures) from the data analysis system are inserted into a word processor (egg, MS Word) using 'copy-and-paste' procedures (or typed by hand). 
+Finally, the results (text, tables and figures) from the data analysis system are inserted into a word processor (e.g. MS Word) using 'copy-and-paste' procedures (or typed by hand). 
 \clearpage
 Problems with this common, flawed approach according to \citet{Scott} are:
 \begin{itemize}
 \item You sit down to finish writing your manuscript. You realize that you need to clarify one result by running an additional analysis. You first re-run the primary analysis. Major problem: the primary results don’t match what you have in your paper.
 \item When you go to your project folder to run the additional analysis, you find multiple data files, multiple analysis files,
 and multiple results files. You can’t remember which ones are pertinent.
-\item You\'vie just spent the week running your analysis and creating a results report (including tables and figures) to present to your collaborators. You then receive an email from your PI asking you to regenerate the report based on a subset of the original data set and including an additional set of analyses – she would like it by tomorrow\'s meeting.
+\item You have just spent the week running your analysis and creating a results report (including tables and figures) to present to your collaborators. You then receive an email from your boss asking you to regenerate the report based on a subset of the original data set and including an additional set of analyses – she would like it by tomorrow's meeting.
 \item With point and click programs there is no way to record the steps performed that generated the documented results.
 \item Common to keep analysis code, results, and reports as separate files and to save various versions of each of these as separate files.
 After several modifications of one or more of the files involved, becomes unclear which version of the files exactly correspond to the desired analysis and results.
 \item Every time analyses and/or results change, have to regenerate the results report by hand – very time consuming.
-\item Very easy for human error to creep into results report (egg, typing in results by hand, copying/pasting the wrong tables/figures).
+\item Very easy for human error to creep into results report (e.g., typing in results by hand, copying/pasting the wrong tables/figures).
 \end{itemize}
 
 \subsection{Reproducible research reports: A better alternative}
 
-It is widely recommended that a better approach is to create Reproducible Research Reports (RR) \citep{Heal2013}.  This embeds the analysis into the report so that the code to clean and prepare the data or to perform the desired statistical analysis is included in the document that contains the documentation and text of the report. Solutions have been developed that combine both the data analysis code
+It is widely recommended that a better approach is to create Reproducible Research Reports (RRR) \citep{Healy2013}.  This embeds the analysis into the report so that the code to clean and prepare the data or to perform the desired statistical analysis is included in the document that contains the documentation and text of the report. Solutions have been developed that combine both the data analysis code
 and the descriptive prose that constitutes the publishable report into
-a compendium \citep{Gentleman2004,Schultz}.  
+a compendium \citep{Gentleman2004,Schulte}.  
 
-Reproducible research reports are written using a scripting language for
-statistical computing and graphics. The report is made up of ordinary
+RRR are written using a scripting language for
+statistical computing and graphics. An example using the R language is presented in box 1 below. The report is made up of ordinary
 text written in a suitable format that enables the computational process
 to recognise it as text. An example is the Markdown format which is
 very similar to text used when authoring word processor documents
@@ -292,11 +292,13 @@ statistical programming code (such as R codes) that perform data
 manipulations and analyses when the document is `evaluated'. When the
 processing stage is run a report document is generated that includes
 both content as well as the output of any embedded computer code
-`chunks' within the document. These are distinguished from the regular text by a special delimiter at their beginning and end. An example using the R language is presented below:
+`chunks' within the document. These are distinguished from the regular text by a special delimiter at their beginning and end. 
 \clearpage
+\textbf{Box 1: An example Reproducible Research Report using R and markdown}
+\begin{small}
 \begin{singlespace}
 \begin{Shaded}
-\begin{verbatim}
+\begin{BVerbatim}
 ---
 title: "Reproducible report example"
 author: "Ivan C. Hanigan"
@@ -307,47 +309,66 @@ In this section we do some exploratory analysis of the NMMAPS data for
 deaths in Chicago 1987-2000. The code, messages and intermediary
 results are hidden in the resulting report document.
 ```{r, echo = FALSE, message = FALSE}
-## We begin by reading in the data file:
-## If using our own data we would use 'read.csv' or a similar tool to import data to R
-# my.data <- read.csv('data/sampledata.csv',header=TRUE)
-## for this example use data that are included in the dlnm package
-library(dlnm)
-# look at the structure of the data
-# str(chicagoNMMAPS)
-# summary(chicagoNMMAPS)
+\end{BVerbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## We begin  by reading in the data file:}
+\CommentTok{## If using our own data we would use 'read.csv' or a similar tool to import data to R}
+\CommentTok{# my.data <- read.csv('data/sampledata.csv',header=TRUE)}
+\CommentTok{## for this example use data that are included in the dlnm package}
+\KeywordTok{library}\NormalTok{(dlnm)}
+\CommentTok{# look at the structure of the data}
+\CommentTok{# str(chicagoNMMAPS)}
+\CommentTok{# summary(chicagoNMMAPS)}
+\end{Highlighting}
+\end{Shaded}
+\begin{BVerbatim}
 ```
 We made a simple scatter plot shown below
 ```{r, echo = FALSE, message = FALSE}
-## make some plots. first by day
-# with(chicagoNMMAPS, plot(date, cvd, type = "l"))
-# we suspect a relationship between temperature and deaths
-with(chicagoNMMAPS, plot(temp, cvd, pch = 16, cex = .6))
-title(main = "A scatter plot of daily temperatures against deaths")
+\end{BVerbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## make some plots. first by day}
+\CommentTok{# with(chicagoNMMAPS, plot(date, cvd, type = "l"))}
+\CommentTok{# we suspect a relationship between temperature and deaths}
+\KeywordTok{with}\NormalTok{(chicagoNMMAPS, }\KeywordTok{plot}\NormalTok{(temp, cvd, }\DataTypeTok{pch =} \DecValTok{16}\NormalTok{, }\DataTypeTok{cex =} \NormalTok{.}\DecValTok{6}\NormalTok{))}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main =} \StringTok{"A scatter plot of daily temperatures against deaths"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\begin{BVerbatim}
 ```
 We ran some exploratory models. A Poisson GAM with smooth functions
 on temperature and time was compared to a linear fit on temperature.
 ```{r, echo = FALSE, message = FALSE}
-library(mgcv)
-fit1 <- gam(cvd ~ s(temp) + s(time), data=chicagoNMMAPS, family = "poisson")
-# we can access post-estimation summary statistics
-summary(fit1)
-# do model testing to confirm that the error terms are distributed as assumed
-gam.check(fit1)
-# or just plot the exposure-response function
-plot(fit1, select = 1)
-title(main = "The exposure-response function estimated using MGCV")
-aic1 <- AIC(fit1)
-# compare this to a linear term for temperature
-aic0 <- AIC(gam(cvd ~ temp + s(time), data=chicagoNMMAPS, family = "poisson"))
-# calculate the delta aic
-aici <- aic1 - aic0
+\end{BVerbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{## GAM model with a smooth function to estimate the temperature effect}
+\CommentTok{# and another to control for time trends}
+\KeywordTok{library}\NormalTok{(mgcv)}
+\NormalTok{fit1 <-}\StringTok{ }\KeywordTok{gam}\NormalTok{(cvd ~}\StringTok{ }\KeywordTok{s}\NormalTok{(temp) +}\StringTok{ }\KeywordTok{s}\NormalTok{(time), }\DataTypeTok{data=}\NormalTok{chicagoNMMAPS, }\DataTypeTok{family =} \StringTok{"poisson"}\NormalTok{) }
+\CommentTok{# we can access post-estimation summary statistics}
+\CommentTok{# summary(fit1)}
+\CommentTok{# or just plot the exposure-response function}
+\KeywordTok{plot}\NormalTok{(fit1, }\DataTypeTok{select =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main =} \StringTok{"The exposure-response function estimated using MGCV"}\NormalTok{)}
+\NormalTok{aic1 <-}\StringTok{ }\KeywordTok{AIC}\NormalTok{(fit1)}
+\CommentTok{# compare this to a linear term for temperature}
+\NormalTok{aic0 <-}\StringTok{ }\KeywordTok{AIC}\NormalTok{(}\KeywordTok{gam}\NormalTok{(cvd ~}\StringTok{ }\NormalTok{temp +}\StringTok{ }\KeywordTok{s}\NormalTok{(time), }\DataTypeTok{data=}\NormalTok{chicagoNMMAPS, }\DataTypeTok{family =} \StringTok{"poisson"}\NormalTok{))}
+\CommentTok{# calculate the delta aic}
+\NormalTok{aici <-}\StringTok{ }\NormalTok{aic1 -}\StringTok{ }\NormalTok{aic0 }
+\end{Highlighting}
+\end{Shaded}
+\begin{BVerbatim}
 ```
 The result can be automatically inserted to the text. This model has
 a delta AIC of `r round(aici,1)` (smoothed minus linear term).
-\end{verbatim}
+\end{BVerbatim}
 \end{Shaded}
 \end{singlespace}
-
+\end{small}
+\clearpage
 The result can be seen at this link (\url{https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/Reproducible_report_example.pdf}). In this example the Markdown engine is used to construct the final report by `weaving' together the prose and the code.  The prose is written in `markdown' which is a simple way to use `markup' commands to tell the program to do formatting on the inputs.  For example the first `hash' (\#) symbol tells the program that this line should be written in the style of heading-1.  The three `back tick' marks (`) tell the program that the following text should be interpreted as R code.  Inside these `chunks' the `hash' symbol is interpreted as a comment and the line is not executed.
 
 If an analysis is published as a reproducible report, readers can have greater confidence 
@@ -356,7 +377,7 @@ prevention approach has been recommended that incorporates
 evidence-based data analysis tools and techniques into such a pipeline
 \citep{Leek2015a}.
 
-\subsection{Reproducible Research Pipelines (REP) defined}
+\subsection{Reproducible Research Pipelines (RRP) defined}
 
 
 The techniques of pipelines described here are targeting the integrity
@@ -374,7 +395,7 @@ individual or domain-specific preferences \citep{Borer2009a,White2013}.
 
 \citet{Noble2009} points out that `the principles behind organizing and
 documenting computational experiments are often learned on the fly, and
-this learning is strongly influenced by personal predilections'. 
+this learning is strongly influenced by `personal predilections'. 
 \citet{Leek2015b} describe this as data analysis being `taught through an
 apprenticeship model, and different disciplines develop their own
 analysis subcultures'. By codifying what an appropriate pipeline would
@@ -636,9 +657,9 @@ steps include:
 
 \begin{itemize}
 \itemsep1pt\parskip0pt\parsep0pt
-\item  Data Management Plans and Data Inventories
-\item  Planning and implementing a pipeline
-\item  Tracking method steps
+\item  data management plans and data inventories
+\item  planning and implementing a pipeline
+\item  tracking method steps.
 \end{itemize}
 
 These three topics will be explored in each of the next three sections of this report.
@@ -946,7 +967,7 @@ conduct an analysis of health, environmental and social data.}
 \end{figure}
 
 A high resolution version of this image is available online at
-\href{https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf}{\url{https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf}}
+\url{https://github.com/swish-climate-impact-assessment/swish_data_management_procedures/blob/phd_appendix/images/envepi_data_pipeline.pdf}.
 
 \subsection{Case study 3: Visualisation of methods steps using bespoke
 software}\label{case-study-3-visualisation-of-methods-steps-using-bespoke-software}
@@ -1135,7 +1156,7 @@ Peng R. D. (2015).
 
 \bibitem[Peng and Dominici(2008)]{Peng2008a}
 Peng R. D. \& Dominici F. (2008).
-\newblock \emph{{StAtistical Methods For Environmental Epidemiology With R. A
+\newblock \emph{{Statistical Methods For Environmental Epidemiology With R. A
   Case Study In Air Pollution And Health}}.
 \newblock Springer Science {\&} Business Media, New York, USA.
 
